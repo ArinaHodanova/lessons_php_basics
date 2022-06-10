@@ -1,3 +1,6 @@
+//echo 'Создать массив из случайных уникальных целых чисел скажем от 0 до 200 - 6 уникальных чисел';
+//Разделить эти числа на 2 массива, так чтобы сумма чисел в каждом массиве была равна или если это невозможно, то разница между суммами массивов была минимальна
+ 
 //Cоздать одно случайное целое число от 1 до 200
 $min = 0; //мин. число
 $max = 10; //макс. число
@@ -13,12 +16,14 @@ function addsUniqueNumberArray($amount_unique_num, $min, $max) {
   $i = 0;
   while($i <= $amount_unique_num - 1) {
     $rand_num = mt_rand($min, $max);
-    if(!in_array($rand_num, $arr_rand) || count($arr_rand[$i]) <= $amount_unique_num) {//проверяем на уникальность || задаем минимальную длину массива
+    if(!in_array($rand_num, $arr_rand) && count($arr_rand[$i]) <= $amount_unique_num) {//проверяем на уникальность || задаем минимальную длину массива
     $arr_rand[$i] = $rand_num;//уникальное число добавляем в массив
-    }
     $i++;
+    }
+    $count_num++;
+    echo $count_num . '<br>';
   }
- 
+  
   echo '<pre>';
   print_r($arr_rand);
   echo '</pre>';
