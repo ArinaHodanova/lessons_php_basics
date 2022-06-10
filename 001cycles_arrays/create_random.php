@@ -16,7 +16,7 @@ function addsUniqueNumberArray($amount_unique_num, $min, $max) {
     $rand_num = mt_rand($min, $max);
     $count_num++;
 
-      if(!in_array($rand_num, $arr_rand) || count($arr_rand[$i]) <= $amount_unique_num) {//проверяем на уникальность || задаем минимальную длину массива
+      if(!in_array($rand_num, $arr_rand)) {//проверяем на уникальность || задаем минимальную длину массива
           $arr_rand[$i] = $rand_num;//уникальное число добавляем в массив
           
       }
