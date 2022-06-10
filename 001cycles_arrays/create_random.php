@@ -18,14 +18,13 @@ function addsUniqueNumberArray($amount_unique_num, $min, $max) {
     $count_num = 0;
     
       if(!in_array($rand_num, $arr_rand)) {//проверяем на уникальность
-          $arr_rand[] = $rand_num;//уникальное число добавляем в массив
+          $arr_rand[$i] = $rand_num;//уникальное число добавляем в массив
       }
-
-      echo '<pre>';
-      print_r($rand_num);
-      echo '</pre>';
-
   }
+
+  echo '<pre>';
+  print_r($arr_rand);
+  echo '</pre>';
+
 }
 addsUniqueNumberArray($amount, $min, $max);
-?>
