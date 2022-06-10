@@ -22,7 +22,7 @@ function addsUniqueNumberArray($amount_unique_num, $min, $max) {
             $arr_rand[$i] = $rand_num;//уникальное число добавляем в массив
             $i++;
         }
-        
+        $count_num++; //подсчет не уникальных чисел 
   }
   echo '<pre>';
   print_r($arr_rand);
