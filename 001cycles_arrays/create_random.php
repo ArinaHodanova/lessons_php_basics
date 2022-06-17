@@ -6,21 +6,19 @@ echo 'Создать массив из случайных уникальных �
 //Cоздать одно случайное целое число от 1 до 200
 $min = 0; //мин. число
 $max = 200; //макс. число
-$count_number = 200; //диапозон поиска чисел
 $amount = 7; //количество уникальных чисел для значения в массив 
 
-//вариант со страндартной функцией 
+//вариант со стандартной функцией 
 function addsUniqueNumberArray($amount_unique_num, $min, $max) {
   $arr_rand = []; //массив случайных чисел 
   $count_num = 0; //счетчик сколько случайных чисел
   $i = 0;
-  while($i <= $amount_unique_num - 1) {
+  while($i < $amount_unique_num) {
         $rand_num = mt_rand($min, $max);
- 
         if(!in_array($rand_num, $arr_rand)) {//проверяем на уникальность 
-            $arr_rand[$i] = $rand_num;//уникальное число добавляем в массив  
+            $arr_rand[$i] = $rand_num;//уникальное число добавляем в массив 
+            $i++; 
         }
-        $i++;
     $count_num++;//подсчет колличества случайных чисел
   }
   return $arr_rand;
@@ -31,27 +29,26 @@ function addsUniqueКeyArray($amount_unique_num, $min, $max) {
   $arr_rand = []; //массив случайных чисел 
   $count_num = 0; //счетчик сколько случайных чисел
 
-  for ($i = 0; $i <= $amount_unique_num - 1; $i++) {
-      $rand_num = mt_rand($min, $max);
-      ++$arr_rand[$rand_num];
-      $count_num++;//подсчет колличества случайных чисел
+  $i = 0;
+  while ($i < $amount_unique_num) {
+    $rand_num = mt_rand($min, $max);
+    
+    if(!array_key_exists($rand_num, $arr_rand)){ //проверяем на уникальность ключей 
+      $arr_rand[$rand_num]++;
+      $i++; 
+    }
+    
+    echo $count_num++ . '<br>';//подсчет колличества случайных чисел
   }
-  return $arr_rand;
+
 }
 
-$t1 = microtime(true); 
-for($i=0; $i<10000; $i++){
-    addsUniqueNumberArray($amount, $min, $max);
-}
-$t2 = microtime(true); 
-$t1=$t2-$t1;
-echo $t1 . '<br>';
+//вариант со стандартной функцией
+echo '<pre>';
+print_r(addsUniqueNumberArray($amount, $min, $max));
+echo '</pre>';
 
-$t1 = microtime(true); 
-for($i=0; $i<10000; $i++){
-    addsUniqueКeyArray($amount, $min, $max);
-}
-$t2 = microtime(true); 
-$t1=$t2-$t1;
-echo $t1 . '<br>';
-?>
+//вариант с уникальным ключем 
+echo '<pre>';
+print_r(addsUniqueКeyArray($amount, $min, $max));
+echo '</pre>';
