@@ -38,9 +38,9 @@ function addsUniqueКeyArray($amount_unique_num, $min, $max) {
       $i++; 
     }
     
-    echo $count_num++ . '<br>';//подсчет колличества случайных чисел
+    $count_num++;//подсчет колличества случайных чисел
   }
-
+  return $arr_rand;
 }
 
 //вариант со стандартной функцией
