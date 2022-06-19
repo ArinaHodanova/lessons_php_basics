@@ -31,6 +31,4 @@ function addsUniqueNumberArray($amount_unique_num, $min, $max) {
 
 }
 addsUniqueNumberArray($amount, $min, $max);
-$aa["h"]=1;
-echo "count".count($aa);
 ?>
