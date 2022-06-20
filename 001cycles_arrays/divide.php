@@ -3,6 +3,7 @@
 // считающую и сравнивающую сумму чисел в каждом получившемся массиве
 
 function SplitHalfUniqueArr($arr) {
+
   //работаем с массивом со стандартной функцией
   $length = count($arr); //находим длину массива
   $middle = count($arr) / 2; //находим середину массива
@@ -13,22 +14,20 @@ function SplitHalfUniqueArr($arr) {
     $left_side_arr[] = $arr[$i];//создаем массив с левой частью массива функции $adds_unique_num_arr
     $value_left_arr += $left_side_arr[$i];//находим сумму значений массива с левой частью
   }
-  echo $value_left_arr . '<br>';
 
   for($i = $middle; $i < $length; $i++ ) {//находим правую часть 
     $right_right_arr = $arr[$i];//создаем массив с правой частью массива функции $adds_unique_num_arr
     $value_right_arr += $right_right_arr;
   }
-  echo $value_right_arr . '<br>';
 
   if($value_left_arr > $value_right_arr) {
-    echo 'Левая часть больше правой'; 
+    return 'Левая часть - ' . $value_left_arr . ' больше правой - ' . $value_right_arr; 
   } elseif($value_left_arr < $value_right_arr) {
-    echo 'Правая часть больше левой'; 
+    return 'Правая часть - ' . $value_right_arr . ' больше левой - ' . $value_left_arr; 
   } else {
-    echo 'Левая и правая части равны'; 
+    return 'Левая' . $value_left_arr . ' и правая' . $value_right_arr . ' части равны'; 
   }
 
 }
-SplitHalfUniqueArr($adds_unique_num_arr);
+echo SplitHalfUniqueArr($adds_unique_num_arr);
 ?>
