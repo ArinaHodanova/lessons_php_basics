@@ -14,7 +14,6 @@ function SplitHalfUniqueArr($arr) {
   for($i = 0; $i < $length; $i++ ) {
     if($i < $middle) { 
         $left_side_arr[$i] = $arr[$i];//в новый массив выводим значения левой части массива с рандомными значениями (функция $adds_unique_num_arr)
-        $value_left_arr += $left_side_arr[$i];//находим сумму значений массива  
     } elseif( $i >= $middle) {
         $right_right_arr[] = $arr[$i];//в новый массив выводим значения правой части массива с рандомными значениями (функция $adds_unique_num_arr)
     }
