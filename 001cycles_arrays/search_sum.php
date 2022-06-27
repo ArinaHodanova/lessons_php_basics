@@ -9,9 +9,8 @@ function calculationMultiArrSum($arr) {
   }
   return $sum;
 }
-calculationMultiArrSum($split_half_unique_arr);//передаем многомерный массив с рандомными значениями 
+$calculation_multi_arr_sum = calculationMultiArrSum($split_half_unique_arr);//передаем многомерный массив с рандомными значениями 
 
-echo '<br>';
 //функция для вычитания суммы у одномерного массива
 function calculationOneArrSum($arr) {
   $length = count($arr);
@@ -20,5 +19,15 @@ function calculationOneArrSum($arr) {
   }
   return $sum;
 }
-calculationOneArrSum($adds_unique_num_arr);//передаем одномерный массив с рандомными значениями 
+$calculation_one_arr_sum = calculationOneArrSum($adds_unique_num_arr);//передаем одномерный массив с рандомными значениями 
+
+//функция сравнения сумм двух массивов
+function compareSumArrays($multi_arr, $one_arr) {
+  if($one_arr == $multi_arr) {
+    echo 'значения равны';
+  } else {
+    echo 'ошибка';
+  }
+}
+compareSumArrays($calculation_multi_arr_sum, $calculation_one_arr_sum);
 ?>
