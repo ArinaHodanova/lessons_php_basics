@@ -24,9 +24,9 @@ $calculation_one_arr_sum = calculationOneArrSum($adds_unique_num_arr);//пере
 //функция сравнения сумм двух массивов
 function compareSumArrays($multi_arr, $one_arr) {
   if($one_arr == $multi_arr) {
-    echo 'значения равны';
+      return true;
   } else {
-    echo 'ошибка';
+      return false;
   }
 }
 compareSumArrays($calculation_multi_arr_sum, $calculation_one_arr_sum);
