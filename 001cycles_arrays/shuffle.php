@@ -11,6 +11,11 @@ function  shuffleArray($num, $arr) {
   while($i <= $num) {
     shuffle($arr); //перемешиваем массив при каждой итерации 
 
+    echo 'Массив с которым работаем';
+    echo '<pre>';
+    print_r($arr);
+    echo '</pre>';
+
     $right_arr_value_sum = 0; //сумма массива правой части
     $left_arr_value_sum = 0; //сумма массива левой части
     
@@ -25,11 +30,28 @@ function  shuffleArray($num, $arr) {
  
     //получаем разность сумм значений массивов
     $difference = $left_arr_value_sum - $right_arr_value_sum;
-    echo $difference . '<br>';
     
     $difference_arr[] = $difference;
     $i++;
   }
+  
+  //вычисляем наиболее близкое к 0 число 
+  $max_value_arr = [];//массив с положит. значениями 
+  $min_value_arr = [];//массив с отриц.  значениями 
+
+  foreach($difference_arr as $value) {
+    if($value >= 0) {
+      $max_value_arr[] = $value;
+    } 
+    if($value < 0) {
+      $min_value_arr[] = $value;
+    } 
+  }
+
+  $positive_value = min($max_value_arr);//находит самое мин число среди положительных 
+  $negative_value = max($min_value_arr);//находим самое мин число среди отрицательных
+  echo $negative_value;
+
 }
 $shuffle_array = shuffleArray(3, $adds_unique_num_arr);
 ?>
