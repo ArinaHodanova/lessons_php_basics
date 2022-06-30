@@ -19,7 +19,6 @@ function  shuffleArray($num, $arr) {
     $left_arr = array_slice($arr, 0, $middle);
     $difference = 0;
     
-
     //получаем сумму значений массивов
     $left_arr_value_sum = array_sum($left_arr);
     $right_arr_value_sum = array_sum($right_arr);
@@ -31,7 +30,6 @@ function  shuffleArray($num, $arr) {
     $difference_arr[] = $difference;
     $i++;
   }
-
 }
 $shuffle_array = shuffleArray(3, $adds_unique_num_arr);
 ?>
