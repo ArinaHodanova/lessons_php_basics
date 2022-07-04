@@ -1,24 +1,32 @@
 <?
-// написать функцию делящую пополам между 2мя числовыми массивами полученный массив случайных чисел
-function SplitHalfUniqueArr($arr) {
-  //работаем с массивом со стандартной функцией
-  $length = count($arr); //находим длину массива
-  $middle = count($arr) / 2; //находим середину массива
+//Функция должна перетасовать входящий массив и возвращает наиболее сбалансированные выходяшие
+function  shuffleArray($num, $arr) {
+  if (!is_array($arr)) return $arr;
 
-  $left_side_unique_arr = [];
-  $right_side_unique_arr = [];
+  $middle = count($arr) / 2;//находим середину массива
+  $i = 1;
+  $difference_arr = [];//масив, который будет накапливать значения, полученные от сумм массива
 
-  //делим массив с рандомными значениями на два массива. И находим сумму значений каждого полученного массива
-  for($i = 0; $i < $length; $i++ ) {
-    if($i < $middle) { 
-        $left_side_unique_arr[$i] = $arr[$i];//в новый массив выводим значения левой части массива с рандомными значениями (функция $adds_unique_num_arr)
-    } elseif( $i >= $middle) {
-        $right_side_unique_arr[] = $arr[$i];//в новый массив выводим значения правой части массива с рандомными значениями (функция $adds_unique_num_arr)
-    }
+  while($i <= $num) {
+    shuffle($arr); //перемешиваем массив при каждой итерации 
+
+    $right_arr_value_sum = 0; //сумма массива правой части
+    $left_arr_value_sum = 0; //сумма массива левой части
+    
+    //делим массив напополам
+    $right_arr = array_slice($arr, $middle, $middle);
+    $left_arr = array_slice($arr, 0, $middle);
+    $difference = 0;
+    
+    //получаем сумму значений массивов
+    $left_arr_value_sum = array_sum($left_arr);
+    $right_arr_value_sum = array_sum($right_arr);
+
+    //получаем разность сумм значений массивов
+    $difference = $left_arr_value_sum - $right_arr_value_sum;
+    $i++;
   }
-
-  $examination_arr = [$left_side_unique_arr, $right_side_unique_arr];//сформируем массив для проверки 
-  return  $examination_arr;
 }
-$split_half_unique_arr = SplitHalfUniqueArr($adds_unique_num_arr);
+
+$shuffle_array = shuffleArray(3, $adds_unique_num_arr);
 ?>
