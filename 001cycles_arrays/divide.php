@@ -16,8 +16,8 @@ function SplitHalfUniqueArr($arr) {
         $right_side_unique_arr[] = $arr[$i];//в новый массив выводим значения правой части массива с рандомными значениями (функция $adds_unique_num_arr)
     }
   }
+
   $examination_arr = [$left_side_unique_arr, $right_side_unique_arr];//сформируем массив для проверки 
   return  $examination_arr;
 }
 $split_half_unique_arr = SplitHalfUniqueArr($adds_unique_num_arr);
-?>
