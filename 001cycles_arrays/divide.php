@@ -10,4 +10,4 @@ function SplitHalf($arr) {
   $examination_arr = [$right_arr, $right_arr];//сформируем массив для проверки 
   return  $examination_arr;
 }
-$split_half = SplitHalf($adds_unique_num_arr);
+$split_half_unique_arr = SplitHalf($adds_unique_num_arr);
