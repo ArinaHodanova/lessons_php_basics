@@ -1,8 +1,6 @@
 <?
 // написать функцию делящую пополам между 2мя числовыми массивами полученный массив случайных чисел
-function SplitHalfUniqueArr($arr) {
-  //работаем с массивом со стандартной функцией
-
+function SplitHalf($arr) {
   $middle = count($arr) / 2; //находим середину массива
 
   //делим массив $arr на две части 
@@ -12,4 +10,4 @@ function SplitHalfUniqueArr($arr) {
   $examination_arr = [$right_arr, $right_arr];//сформируем массив для проверки 
   return  $examination_arr;
 }
-$split_half_unique_arr = SplitHalfUniqueArr($adds_unique_num_arr);
+$split_half = SplitHalf($adds_unique_num_arr);
