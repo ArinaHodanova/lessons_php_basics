@@ -7,7 +7,7 @@ function SplitHalf($arr) {
   $right_arr = array_slice($arr, $middle, $middle);
   $left_arr = array_slice($arr, 0, $middle);
 
-  $examination_arr = [$right_arr, $right_arr];//сформируем массив для проверки 
+  $examination_arr = [$left_arr, $right_arr];//сформируем массив для проверки 
   return  $examination_arr;
 }
 $split_half_unique_arr = SplitHalf($adds_unique_num_arr);
