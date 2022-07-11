@@ -5,10 +5,10 @@
         $flag = true;
         for ($i = 2; $i < $num; $i++) {
              if ($num % $i === 0) {
-                 $flag = 'Yes';
+                 $flag = true;
                   break;
               } else {
-                    $flag = 'No';
+                    $flag = false;
               }
          }
          return $flag;
