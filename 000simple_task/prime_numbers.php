@@ -1,26 +1,17 @@
 <?php
-echo "hello";
-function searchPrimeNumbers(int $lenght=9)
-{
-	$prime_numbers = [1,2];
-	for($i=3;$i<=$lenght;$i++)
-	{
-		$prime = true;
-		for($k=2;$k<$i;$k++) {
-			if(is_int($i/$k) )
-			{
-				$prime = false;
-				break;
-			}
-		}
-		echo $i."  ".$k.PHP_EOL;
-		if($prime)
-		{
-			$prime_numbers[] = $i;
-		}
-	}
-	print_r($prime_numbers);
-}
-searchPrimeNumbers(17);
+//определаем яляется ли переданное число простым 
+   function definePrimeNumbers(int $num) {
+        $arr = [];
+        $flag = true;
+        for ($i = 2; $i < $num; $i++) {
+             if ($num % $i === 0) {
+                 $flag = 'Yes';
+                  break;
+              } else {
+                    $flag = 'No';
+              }
+         }
+         return $flag;
+    }
+        echo definePrimeNumbers(9);
 ?>
-
