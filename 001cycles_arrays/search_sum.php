@@ -21,6 +21,19 @@ function calculationOneArrSum($arr) {
 }
 $calculation_one_arr_sum = calculationOneArrSum($adds_unique_num_arr);//передаем одномерный массив с рандомными значениями 
 
+/*функция для вычитания сумм каждого элементы двумерного массива*/
+function multiArrSumKeys($arr) {  
+  $sum_arr = [];
+  foreach ($arr as $valueFirstOrder) {
+      $sum = 0;
+      foreach ($valueFirstOrder as $value) { 
+        $sum += $value;
+      }
+      $sum_arr[] = $sum;
+  }
+  return $sum_arr;
+}
+
 //функция сравнения сумм двух массивов
 function compareSumArrays($multi_arr, $one_arr) {
   if($one_arr == $multi_arr) {
