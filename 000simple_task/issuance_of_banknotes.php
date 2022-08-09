@@ -7,25 +7,30 @@
     4 - бесконечное количество банкнот
     5 - есть в наличии купюры 100, 50, 20, 10
       
-function issueMoney($request_sum, ...$money) {
-     rsort($money);//сортируем массив по убыванию
+        $money_bank_arr = [100, 50, 20, 10];
+        function issueMoney($request_sum, ...$money_bank) {
+            rsort($money_bank);//сортируем массив по убыванию
 
-            for($i = 0; $i < count($money_pres); $i++) {
+            for($i = 0; $i < count($money_bank); $i++) {
                 //если запрашиваемое число = купюре из банкоматы
-                if($request_sum == $money_pres[$i]) {
-                    echo $money_pres[$i] . '<br>';
+                if($request_sum == $money_bank[$i]) {
+                    echo $money_bank[$i] . '<br>';
                     break;
-            }  
+                }  
 
                 //если запрашиваемая сумма меньше 100, то нам нужно только сложить купюры, которые есть в банкомате
                 //преобразуем в строку, что бы определить сколько десятков в купюрах
-                $money_pres_len = iconv_strlen(strval($money[$i]));
-                if($money_pres_len == 2) {
-                    echo $money_pres[$i] . '<br>';
+                $money_bank_len = iconv_strlen(strval($money_bank[$i]));
+                if($money_bank_len == 2) {
+                    echo $money_bank[$i] . '<br>';
                 }  
             }
 
-}
-        issueMoney(60, 100, 50, 20, 10);
+            echo '<pre>';
+            print_r($money_bank);
+            echo '</pre>';
+            
+        }
+        issueMoney(60, $money_bank_arr);
 
 ?>
