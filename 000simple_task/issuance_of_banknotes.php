@@ -20,10 +20,6 @@
 
             }
 
-            echo '<pre>';
-            print_r($money_bank);
-            echo '</pre>';
-            
         }
         $money_bank_arr = [100, 50, 20, 10];//купюры в наличии 
         issueMoney(60, $money_bank_arr);
