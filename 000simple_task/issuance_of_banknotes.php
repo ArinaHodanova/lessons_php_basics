@@ -8,7 +8,7 @@
     5 - есть в наличии купюры 100, 50, 20, 10
       
         $money_bank_arr = [100, 50, 20, 10];
-        function issueMoney($request_sum, ...$money_bank) {
+        function issueMoney($request_sum, $money_bank) {
             rsort($money_bank);//сортируем массив по убыванию
 
             for($i = 0; $i < count($money_bank); $i++) {
