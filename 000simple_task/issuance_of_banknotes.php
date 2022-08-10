@@ -7,21 +7,25 @@
     4 - бесконечное количество банкнот
     5 - есть в наличии купюры 100, 50, 20, 10
       
-        function issueMoney($request_sum, $money_bank) {
-            $delivery_banknot = []//массив с выданными купюрами
-            rsort($money_bank);//сортируем массив по убыванию
+$money_bank = [100, 50, 20, 10];//купюры в наличии 
+  function issueMoney($request_sum, $money_bank_arr) {
+      $delivery_banknot = [];//массив с выданными купюрами
 
-            for($i = 0; $i < count($money_bank); $i++) {
-                //если запрашиваемое число = купюре из банкоматы
-                if($request_sum == $money_bank[$i]) {
-                    echo $money_bank[$i] . '<br>';
-                    break;
-                }  
+      for($i = 0; $i < count($money_bank_arr); $i++) {
+          $nominal = $money_bank_arr[$i];//текущая купюра
 
-            }
+          while($request_sum >= $nominal) {
+              $request_sum = $request_sum - $nominal;
+              $delivery_banknot[] = $nominal;
+              echo $request_sum  . '<br>';
+          }
 
-        }
-        $money_bank_arr = [100, 50, 20, 10];//купюры в наличии 
-        issueMoney(60, $money_bank_arr);
-
+          //если запрашиваемое число = купюре из банкоматы
+          if($request_sum == $money_bank_arr[$i]) {
+              //echo $money_bank[$i] . '<br>';
+              //break;
+          } 
+      }
+  }
+  issueMoney(60, $money_bank);
 ?>
