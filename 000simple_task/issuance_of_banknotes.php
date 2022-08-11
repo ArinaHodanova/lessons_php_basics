@@ -8,24 +8,19 @@
     5 - есть в наличии купюры 100, 50, 20, 10
       
 $money_bank = [100, 50, 20, 10];//купюры в наличии 
-  function issueMoney($request_sum, $money_bank_arr) {
-      $delivery_banknot = [];//массив с выданными купюрами
+function issueMoney($request_sum, $money_bank_arr) {
+   $delivery_banknot = [];//массив с выданными купюрами
 
-      for($i = 0; $i < count($money_bank_arr); $i++) {
-          $nominal = $money_bank_arr[$i];//текущая купюра
+   foreach($money_bank_arr as $nominal) {
+       while($request_sum >= $nominal) {
+           $request_sum = $request_sum - $nominal;
+           $delivery_banknot[] = $nominal; 
+       }
+    }
 
-          while($request_sum >= $nominal) {
-              $request_sum = $request_sum - $nominal;
-              $delivery_banknot[] = $nominal;
-              echo $request_sum  . '<br>';
-          }
-
-          //если запрашиваемое число = купюре из банкоматы
-          if($request_sum == $money_bank_arr[$i]) {
-              //echo $money_bank[$i] . '<br>';
-              //break;
-          } 
-      }
-  }
-  issueMoney(60, $money_bank);
+   return $delivery_banknot;
+}
+ echo '<pre>';
+ print_r(issueMoney(100, $money_bank));
+ echo '</pre>';
 ?>
