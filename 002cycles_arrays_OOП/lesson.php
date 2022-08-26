@@ -18,10 +18,11 @@ foreach($fh_arr as $line) {
         $arr_fn[$line_arr[0]] = $line_arr[1];
         $mfc = new MyFormulaCalculation();
         if($mfc->fnCreate($line_arr[1])) {
-            $arr_obj[] = new MyFormulaCalculation($line_arr[1]);//массив с формулами, который поместим в объект 
+            $arr_obj = new MyFormulaCalculation();
+            $arr_obj->fnCreate($line_arr[1]);//массив с формулами, который поместим в объект 
         } 
     } else {
-        $arr_variable[$line_arr[0]] = $line_arr[1];
+        $arr_variable[$line_arr[0]] = $line_arr[1];//массив с числами
     }
 }
 
