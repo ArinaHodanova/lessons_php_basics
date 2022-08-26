@@ -1,7 +1,8 @@
 <?
 class MyFormulaCalculation {
-     public function fnCreate($fn) {
-               return false;
-      }
+      public static $arr = [];
+      public function fnCreate(string $fn) {
+           return true; 
+      } 
 }
 ?>
