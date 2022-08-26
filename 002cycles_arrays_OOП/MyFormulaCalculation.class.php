@@ -7,7 +7,7 @@ class MyFormulaCalculation {
       } 
 
       public function fnResult() {
-           return true;
+           return 1;
       }
 }
 ?>
