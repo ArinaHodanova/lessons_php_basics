@@ -1,8 +1,13 @@
 <?
 class MyFormulaCalculation {
-      public static $arr = [];
+      public static $arr_formulasы = [];//для объектов этого класса по имени
+
       public function fnCreate(string $fn) {
-           return true; 
+           return false; 
       } 
+
+      public function fnResult() {
+           return true;
+      }
 }
 ?>
