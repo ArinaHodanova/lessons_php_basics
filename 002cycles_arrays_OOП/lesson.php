@@ -13,19 +13,27 @@ $arr_variable = [];//переменная содержащая переменн�
 foreach($fh_arr as $line) {
     $line_arr = explode("=", $line); //преобразуем в массив , разделив по знаку = 
     if (2 != count($line_arr)) continue; 
-               
+
+    $mfc = new MyFormulaCalculation();
+
+    if($mfc->fnCreate($line_arr[1])) {
+        MyFormulaCalculation::$arr_formulas[$line_arr[0]] = $mfc;
+    } 
+
+    /*          
     if(fnGetLeftAction($line_arr[1])) {
-        $arr_fn[$line_arr[0]] = $line_arr[1];
+        $arr_fn[$line_arr[0]] = $line_arr[1];//масив содержащий формулы
         $mfc = new MyFormulaCalculation();
-        if($mfc->fnCreate($line_arr[1])) {
-            $arr_obj = new MyFormulaCalculation();
-            $arr_obj->fnCreate($line_arr[1]);//массив с формулами, который поместим в объект 
-        } 
     } else {
         $arr_variable[$line_arr[0]] = $line_arr[1];//массив с числами
-    }
+    }*/
 }
 
+//второй цикл 
+foreach(MyFormulaCalculation::$arr_formulas as $key => $value) {
+    $value = new MyFormulaCalculation();
+    echo "Ключ {$key} значение {$value->fnResult()} <br>";
+}
 
 //добавлять не всякую строку, а только ту с которой fnCreate вернула тру
 /*дописать добавление в массив $arr_obj при условии, что fnCreate вернуло true созданного объект*/
@@ -40,5 +48,4 @@ function fnGetLeftAction(string $variable_or_function_data) {
         } 
     }
 }
-
 ?>
