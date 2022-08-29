@@ -31,7 +31,6 @@ foreach($fh_arr as $line) {
 
 //второй цикл 
 foreach(MyFormulaCalculation::$arr_formulas as $key => $value) {
-    $value = new MyFormulaCalculation();
     echo "Ключ {$key} значение {$value->fnResult()} <br>";
 }
 
