@@ -14,11 +14,14 @@ foreach($fh_arr as $line) {
     $line_arr = explode("=", $line); //преобразуем в массив , разделив по знаку = 
     if (2 != count($line_arr)) continue; 
 
+    $fname = trim($line_arr[0]);//добавляем ключ в переменную 
+    $fexpr =  trim($line_arr[1]);//добавляем значение в переменную 
+
     $mfc = new MyFormulaCalculation();
 
-    if($mfc->fnCreate($line_arr[1])) {
-        MyFormulaCalculation::$arr_formulas[$line_arr[0]] = $mfc;
-    } 
+    if($mfc->fnCreate($fexpr)) {
+        MyFormulaCalculation::$arr_formulas[$fname] = $mfc;
+    }
 
     /*          
     if(fnGetLeftAction($line_arr[1])) {
