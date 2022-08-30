@@ -1,2 +1,3 @@
 [<<Formula>>|static array formulas |fnCreate(string expr):bool]
-[<<Formula>>|static array formulas |fnCreate(string expr):bool |fnResult():int]
+Сергей, [30.08.2022 17:32]
+[<<Formula>>|static array formulas;private lvalue:int |fnCreate(string expr):bool;fnResult():int]
