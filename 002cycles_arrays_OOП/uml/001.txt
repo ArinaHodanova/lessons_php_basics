@@ -1,3 +1,4 @@
 [<<Formula>>|static array formulas |fnCreate(string expr):bool]
 Сергей, [30.08.2022 17:32]
 [<<Formula>>|static array formulas;private lvalue:int |fnCreate(string expr):bool;fnResult():int]
+[<<Formula>>|static array formulas;private lvalue:int =Null;private l_var:string = null |fnCreate(string expr):bool;fnResult():int]
