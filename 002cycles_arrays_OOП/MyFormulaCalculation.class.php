@@ -4,11 +4,20 @@ class MyFormulaCalculation {
 
      //принимает формулы
      public function fnCreate($fn) {
-          return is_numeric($fn);  
+          if(is_numeric(trim($fn))) {
+               $this->l_value = $fn;
+               return true;
+          } else {
+               return false;
+          }
      } 
 
      public function fnResult() {
-          return 1; 
+          if(!is_null($this->l_value)) {
+               return $this->l_value;
+          } else {
+               return 777;
+          }
      }
 }
 ?>
