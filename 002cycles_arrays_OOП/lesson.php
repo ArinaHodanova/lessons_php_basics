@@ -1,5 +1,6 @@
 <?
 include 'MyFormulaCalculation.class.php';//класс
+require_once 'LinkCalculation.class.php';//дочерний
 //получить данные с файла, вывести в массив до = ключ, после значение
 //раcформировать массив в два массива - массив с формулой и массив с переменной 
 $filename = __DIR__ . '/file.txt';
@@ -17,7 +18,7 @@ foreach($fh_arr as $line) {
     $fname = trim($line_arr[0]);//добавляем ключ в переменную 
     $fexpr =  trim($line_arr[1]);//добавляем значение в переменную 
 
-    $mfc = new MyFormulaCalculation();
+    $mfc = new LinkCalculation();
 
     if($mfc->fnCreate($fexpr)) {
         MyFormulaCalculation::$arr_formulas[$fname] = $mfc;
