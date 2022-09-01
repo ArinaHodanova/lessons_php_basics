@@ -12,10 +12,9 @@ class LinkCalculation extends MyFormulaCalculation {
 
   public function fnResult() {
     if(!is_null($this->l_var) && array_key_exists($this->l_var, self::$arr_formulas))  {
-      self::$arr_formulas[$this->l_var];
-      //return $this->fnResult();
+        return self::$arr_formulas[$this->l_var]->fnResult();
     } else {
-      return parent::fnResult();
+        return parent::fnResult();
     }
   }
 
