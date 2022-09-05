@@ -1,10 +1,26 @@
 <?php
 include 'MyFormulaCalculation.class.php';//класс
+require_once 'LinkCalculation.class.php';//дочерний
 //получить данные с файла, вывести в массив до = ключ, после значение
 //раcформировать массив в два массива - массив с формулой и массив с переменной 
 $filename = __DIR__ . '/file.txt';
 $fh_arr = file($filename);//читаем содержимое и выводим в массив
-$actions = [ '*' => 1, '/' => 1, '+' => 1, '-' => 1 ];
+//$actions = [ '*' => 1, '/' => 1, '+' => 1, '-' => 1 ];
+$actions = [ 
+  '*' => function (int $value = null, int $exp = null) {
+    return $value * $exp ;
+  }, 
+  '/' => function (int $value = null, int $exp = null) {
+    return $value / $exp ;
+  }, 
+  '+' => function (int $value = null, int $exp = null) {
+    return $value + $exp ;
+  }, 
+  '-' => function (int $value = null, int $exp = null) {
+    return $value - $exp ;
+  }
+];
+
 $arr_value = [];
         
 $arr_fn = [];//переменная содержащая функции
@@ -15,11 +31,14 @@ foreach($fh_arr as $line) {
     if (2 != count($line_arr)) continue; 
     //echo $line_arr[1].PHP_EOL;
 
-    $mfc = new MyFormulaCalculation();
+    $fname = trim($line_arr[0]);//добавляем ключ в переменную 
+    $fexpr =  trim($line_arr[1]);//добавляем значение в переменную 
 
-    if($mfc->fnCreate($line_arr[1])) {
-        MyFormulaCalculation::$arr_formulas[$line_arr[0]] = $mfc;
-    } 
+    $mfc = new LinkCalculation();
+
+    if($mfc->fnCreate($fexpr)) {
+        MyFormulaCalculation::$arr_formulas[$fname] = $mfc;
+    }
 
     /*          
     if(fnGetLeftAction($line_arr[1])) {
