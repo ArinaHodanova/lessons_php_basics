@@ -1,10 +1,10 @@
 alpha = 1 = 1
-beta = 2
-gamma = 3
-delta = 4
+beta =2
+gamma =3
+delta =4
 sum = alpha+3
 sum = alpha/3
 minus = beta-gamma
 multiply = beta*gamma
-a = 3
-p = 5
+a =3
+p =5
