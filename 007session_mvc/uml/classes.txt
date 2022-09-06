@@ -1,0 +1,2 @@
+[abs_view|public links(); public add_msg();]
+[control| public init()]
