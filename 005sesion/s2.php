@@ -1,10 +1,12 @@
 <?
 session_start();
-if(isset($_SESSION['name'])) {
-  echo $_SESSION['name'] . '<br>';
+if(!empty($_SESSION)) {
+  $arr[$_SESSION['name']] = $_SESSION['masseg'];
 }
 
-if(isset($_SESSION['masseg'])) {
-  echo $_SESSION['masseg'];
-}
+echo '<pre>';
+print_r($arr);
+echo '</pre>';
 ?>
+
+<p><a href="index.php">Назад</a></p>
