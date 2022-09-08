@@ -4,13 +4,14 @@ session_start();
 $name = $_POST['name'];
 $masseg = $_POST['masseg'];
 
-if(isset($name)) {
-  $_SESSION['name'] = $name;
+if(!empty($_POST)) {
+  $_SESSION['arr'][] = [$name,$masseg] ;
+  //header("Location: s2.php");
 }
 
-if(isset($masseg)) {
-  $_SESSION['masseg'] = $masseg;
-}
+echo '<pre>';
+print_r($_SESSION);
+echo '</pre>';
 ?>
 
 <form action="" method="post">
