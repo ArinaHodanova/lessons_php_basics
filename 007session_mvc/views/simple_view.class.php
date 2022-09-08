@@ -17,6 +17,11 @@ _END;
 
 _END;
 	const LINK_ADD_MSG = "index.php";
+	public $model;
+	public function __construct($model)
+	{
+		$this->model=$model;
+	}
 	public function add_msg()
 	{
 		echo sprintf(self::POST_MSG,self::LINK_ADD_MSG);
@@ -25,8 +30,14 @@ _END;
 	{
 		echo sprintf(self::LINKS, self::LINK_ADD_MSG, self::LINK_ADD_MSG);
 	}
+	public function show_msg()
+	{
+		foreach($this->model->get_msgs() as $msg)
+		{
+			echo $msg->get_msg();
+		}
+	}
 }
-$a = new SimpleView();
 //$a->add_msg();
 //$a->links();
 ?>
