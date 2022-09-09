@@ -41,15 +41,17 @@ echo '</pre>';
 
 <?if(!empty($_SESSION['arr'])):?>
   <?for($i = 0; $i < count($_SESSION['arr']); $i++):?>
-    <div>
-    <?if($_POST['checkbox'] !== 'on'):?>
+    <?if($_SESSION['arr'][$i]['check'] !== 'on'):?>
+      <div>
         <span><?=$_SESSION['arr'][$i]['name']?></span>
         <span><?=$_SESSION['arr'][$i]['masseg']?></span>
+      </div>
     <?else:?>
+      <div>
         <span><b><?=$_SESSION['arr'][$i]['name']?></b></span>
         <span><b><?=$_SESSION['arr'][$i]['masseg']?></b></span>
+      </div>
     <?endif?>
-    </div>
     <hr>
   <?endfor?>
 <?endif?>
