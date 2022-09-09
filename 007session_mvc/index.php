@@ -1,25 +1,18 @@
 <?php
-require_once("views/simple_view.class.php");
-require_once("models/simple_model.class.php");
+require_once("views/check_view.class.php");
+require_once("models/check_model.class.php");
 session_start();
 if(!isset($_SESSION["view"]))
 {
-	$model=new SimpleModel();
-	$_SESSION["view"]= new SimpleView($model);
+	$model=new CheckModel();
+	$_SESSION["view"]= new CheckView($model);
 }
 ?>
 <html>
 <body>
 <?php
-/*
-if (isset($_POST['name']) &&isset($_POST['msg']))
-{
-	$_SESSION["msg"][]=[$_POST['name'], $_POST['msg']];
-	echo "set ".PHP_EOL;
-	print_r($_SESSION["msg"]);
-         }
- */
 $_SESSION["view"]->model->add_msg();
+$_SESSION["view"]->show_important_msg();
 $_SESSION["view"]->show_msg();
 $_SESSION["view"]->add_msg();
 $_SESSION["view"]->links();
