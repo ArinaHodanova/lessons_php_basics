@@ -1,10 +1,8 @@
 <?php
-<?
 //error_reporting(-1);
 header("Content-type: text/html; charset=utf-8");
 session_start();
 require_once 'function.php';
-
 ?>
 <html lang="ru">
 <head>
@@ -36,7 +34,6 @@ require_once 'function.php';
   <button type="submit" name="submit" value="on">Отправить</button>
 </form>
 
-
 <div class="masseg__row">
 <?if(!empty($_SESSION['arr'])):?>
   <?for($i = 0; $i < count($_SESSION['arr']); $i++):?>
@@ -46,24 +43,14 @@ require_once 'function.php';
     <?else:?>
       <div class="masseg__inner normal">
     <?endif?>
-
-    <!--Сообщение без имени выводится не будет, так как имя обязательный парамерт-->
-    <?if($_SESSION['arr'][$i]['name'] == '' || !isset($_SESSION['arr'][$i]['name'])):?>
-      <span class="masseg__inner-error"><?='Имя является обязательным параметром';?></span>
-    <?else:?>
-      <p class="masseg__inner-nam">
-        <span class="masseg__inner-name">Ваше имя: </span>
-        <a href="user_page.php" target="_blank"><span><?=$_SESSION['arr'][$i]['name']?></span></a>
-      </p>
-          <?if($_SESSION['arr'][$i]['masseg'] == '' || !isset($_SESSION['arr'][$i]['masseg'])):?>
-          <span class="masseg__inner-error"><?='Нет сообщения';?></span>
-            <?else:?>
-            <p class="masseg__inner-nam">
-              <span class="masseg__inner-name">Ваше сообщение: </span>
-              <span><?=$_SESSION['arr'][$i]['masseg']?></span>
-            </p>
-          <?endif?>
-    <?endif?>
+        <p class="masseg__inner-nam">
+          <span class="masseg__inner-name">Ваше имя: </span>
+          <a href="user_page.php" target="_blank"><span><?=$_SESSION['arr'][$i]['name']?></span></a>
+        </p>
+        <p class="masseg__inner-nam">
+          <span class="masseg__inner-name">Ваше сообщение: </span>
+          <span><?=$_SESSION['arr'][$i]['masseg']?></span>
+        </p>
       </div><!--/masseg__inner-->
 
   <?endfor?>
