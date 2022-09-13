@@ -16,7 +16,7 @@ $name = htmlspecialchars(trim($_POST['name']));
 $masseg = htmlspecialchars(trim($_POST['masseg']));
 
 //проверяем поля на заполненность, выводим предупреждение, если поля не заполнены
-if(strlen($name) <= 1 ) {
+if(strlen($name) < 1) {
   $_SESSION['error_user_name'] = 'Заполните ваше имя';
 } elseif(strlen($masseg) < 1) {
   $_SESSION['error_masseg'] = 'Сообщение недолжно быть путым';
@@ -30,9 +30,8 @@ if(!empty($_POST)) {
     $_POST['checkbox'] = 'off';
   } 
   $checkbox = $_POST['checkbox'];
+  $_SESSION['arr'][] = ['name'=> $name, 'masseg' => $masseg, 'check' => $checkbox];
 }
-
-$_SESSION['arr'][] = ['name'=> $name, 'masseg' => $masseg, 'check' => $checkbox];
 
 //добавлем в маccив имена пользователей 
 $_SESSION['user_name'] = [];
