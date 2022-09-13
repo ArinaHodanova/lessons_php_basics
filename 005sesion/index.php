@@ -34,6 +34,7 @@ require_once 'function.php';
   <button type="submit" name="submit" value="on">Отправить</button>
 </form>
 
+
 <div class="masseg__row">
 <?if(!empty($_SESSION['arr'])):?>
   <?for($i = 0; $i < count($_SESSION['arr']); $i++):?>
