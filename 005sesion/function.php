@@ -36,7 +36,7 @@ if(!empty($_POST)) {
 //добавлем в маccив имена пользователей 
 $_SESSION['user_name'] = [];
 foreach($_SESSION['arr'] as $elem) {
-  if(!array_key_exists($$elem, $_SESSION['user_name'])) $_SESSION['user_name'][$elem['name']] = 0;
+  if(!array_key_exists($elem, $_SESSION['user_name'])) $_SESSION['user_name'][$elem['name']] = 0;
   $_SESSION['user_name'][$elem['name']]++;
 }
 
