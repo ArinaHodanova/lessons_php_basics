@@ -46,7 +46,9 @@ require_once 'function.php';
     <?endif?>
         <p class="masseg__inner-nam">
           <span class="masseg__inner-name">Ваше имя: </span>
-          <a href="user_page.php" target="_blank"><span><?=$_SESSION['arr'][$i]['name']?></span></a>
+            <a href="user_page.php?name=<?=$_SESSION['arr'][$i]['name']?>" target="_blank">
+              <span><?=$_SESSION['arr'][$i]['name']?></span>
+            </a>
         </p>
         <p class="masseg__inner-nam">
           <span class="masseg__inner-name">Ваше сообщение: </span>
