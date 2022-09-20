@@ -1,39 +1,43 @@
-<?
+<?php
+//error_reporting(-1);
 session_start();
 
 unset($_SESSION['error_user_name']);
-unset($_SESSION['error_masseg']);
+unset($_SESSION['error_message']);
 unset($_SESSION['warning']);
 unset($_SESSION['done_mass']);
 
 function redirect() {
-  sleep(10);
   header('Location: index.php');
   exit;
 }
 
 //защищаем переменные от взлома 
 $name = htmlspecialchars(trim($_POST['name']));
-$masseg = htmlspecialchars(trim($_POST['masseg']));
+$message = htmlspecialchars(trim($_POST['message']));
+$checkbox = $_POST['check'];
 
-//проверяем поля на заполненность, выводим предупреждение, если поля не заполнены
-if(strlen($name) < 1 ) {
+
+
+//проверяем на пустоту поля. Если поля пустые, то перекидывает опять на форму заполнения
+if(iconv_strlen($name) < 2 || empty($name)) {
   $_SESSION['error_user_name'] = 'Заполните ваше имя';
-} elseif(strlen($masseg) < 1) {
-  $_SESSION['error_masseg'] = 'Сообщение не должно быть путым';
-} else {
-  $_SESSION['done_mass'] = 'Вы успешно отправили письмо';
+  redirect();
+}
+if(iconv_strlen($message) < 1 || empty($message)) {
+  $_SESSION['error_message'] = 'Сообщение не должно быть путым';
+  redirect();
 }
 
 //если поля не пустые, то создаем массив с сессией 
-if(!empty($name) && !empty($masseg)) {
-  if(!isset($_POST['checkbox'])) {
-    $_POST['checkbox'] = 'off';
-  } 
-  $checkbox = $_POST['checkbox'];
-  $_SESSION['arr'][] = ['name'=> $name, 'masseg' => $masseg, 'check' => $checkbox];
-}
+$_SESSION['arr'][] = ['name'=> $name, 'masseg' => $message, 'check' => $checkbox];
+$_SESSION['done_mass'] = 'Вы успешно отправили письмо';
 
 //получаем все сообщения одного пользователя. 
-$_SESSION['one_user'][$name][] = $masseg;
+$_SESSION['one_user'][$name][] = $message;
+
+//если чекбокс активен
+$_SESSION['check'] = $checkbox;
+redirect();
+
 ?>
