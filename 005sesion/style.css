@@ -1,41 +1,63 @@
+@import url('https://fonts.googleapis.com/css2? family= Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100 & display=swap');
 
-.masseg__row {
-  background: #dbd7d7;
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+  color: #16354D;
 }
-.masseg__inner .masseg__inner-name {
+.message__inner-nam a {
+  text-decoration: none;
+  font-size: 20px;
+  color: #6B99C3;
+}
+
+.mass,
+.form_field span,
+.message__inner-error {
+  font-family: sans-serif;
+  font-size: 14px;
+  padding-right: 5px;
+}
+.message__inner .message__inner-name {
   font-size: 13px;
   margin: 0;
 }
-.mass,
-.form_field span,
-.masseg__inner-error {
-  font-family: sans-serif;
-  font-size: 14px;
+.message__inner-massage {
+  text-decoration: none;
+  font-size: 20px;
 }
-.masseg__inner.bold span {
-  font-weight: 900;
-}
-
-.masseg__inner  {
+.message__inner  {
   padding: 10px;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #fff;
+  margin-bottom: 20px;
+  border-bottom: 1px solid  #eef0f3;
 }
-.masseg__inner p {
+.message__inner:last-child {
+  border-bottom: none;
+}
+.message__inner p {
   margin: 0;
 }
+.message__inner-link {
+  font-size: 13px;
+  margin: 0;
+  text-decoration: none;
+  margin-top: 13px;
+  display: block;
+  color: #6B99C3;
+}
+
 .form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .mass {
-  font-weight: 700;
+  font-weight: normal;
   color: #fff;
   padding: 10px 15px;
   margin: 0;
-  background-color: #bdd1f7;
-  border-radius: 10px;
+  background-color: #6B99C3;
+  border-radius: 4px;
   margin-bottom: 10px;
 }
 
@@ -47,26 +69,41 @@
   margin-bottom: 10px;
 }
 .form_field input {
-  border: 1px solid #8d8d8d;
+  border: 1px solid #eef0f3;
   width: 250px;
-  border-radius: 10px;
+  border-radius: 4px;
   padding: 8px 10px;
 }
 .form_field textarea { 
-  border: 1px solid #8d8d8d;
+  border: 1px solid #eef0f3;
   width: 250px;
-  border-radius: 10px;
+  border-radius: 4px;
   padding: 8px 10px;
   min-height: 100px;
 }
+.btn {
+  border-radius: 4px;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  background: #6b99c3;
+  margin-top: 10px;
+}
+
 .form_field span {
   max-width: 180px;
   padding-top: 2px;
-  font-size: 11px;
   color: #f36b6b;
   margin-left: 10px
 }
-.masseg__inner-error {
+.message__inner-error {
   color: #f36b6b;
   display: block;
+}
+
+.message__row .bold .message__inner-massage {
+  font-weight: 600;
+}
+.message__row .normal .message__inner-massage {
+  font-weight: normal;
 }
