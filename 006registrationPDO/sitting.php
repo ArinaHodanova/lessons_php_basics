@@ -5,7 +5,7 @@ $password = $_POST['password'];
 
 var_dump($_POST);
 //подключаемся к БД
-$db = new PDO('mysql:host=localhost;dbname=training', 'root', 'root');
+$db = new PDO('mysql:host=localhost;dbname=#', '#', '#');
 //делаем запрос, который проверяет если ли значения поля в БД совпад за значение поля формы
 $sql_select = "SELECT * FROM `users_reg` WHERE email=:email";
 $statment = $db->prepare($sql_select);
