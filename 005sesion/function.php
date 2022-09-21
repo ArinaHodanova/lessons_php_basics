@@ -17,8 +17,6 @@ $name = htmlspecialchars(trim($_POST['name']));
 $message = htmlspecialchars(trim($_POST['message']));
 $checkbox = $_POST['check'];
 
-
-
 //проверяем на пустоту поля. Если поля пустые, то перекидывает опять на форму заполнения
 if(iconv_strlen($name) < 2 || empty($name)) {
   $_SESSION['error_user_name'] = 'Заполните ваше имя';
@@ -39,5 +37,4 @@ $_SESSION['one_user'][$name][] = $message;
 //если чекбокс активен
 $_SESSION['check'] = $checkbox;
 redirect();
-
 ?>
