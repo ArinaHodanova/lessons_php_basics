@@ -1,9 +1,13 @@
 @import url('https://fonts.googleapis.com/css2? family= Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100 & display=swap');
-
+*{
+  margin: 0;
+  padding: 0;
+}
 body {
   font-family: 'Roboto', sans-serif;
   font-weight: normal;
   color: #16354D;
+  padding: 0 10px;
 }
 .message__inner-nam a {
   text-decoration: none;
@@ -47,6 +51,7 @@ body {
 }
 
 .form {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -82,6 +87,8 @@ body {
   min-height: 100px;
 }
 .btn {
+  cursor: pointer;
+  font-size: 15px;
   border-radius: 4px;
   color: #fff;
   border: none;
@@ -100,10 +107,61 @@ body {
   color: #f36b6b;
   display: block;
 }
-
+.message__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
 .message__row .bold .message__inner-massage {
   font-weight: 600;
 }
 .message__row .normal .message__inner-massage {
   font-weight: normal;
+}
+.title_user {
+  font-size: 20px;
+}
+.title_user span { 
+  font-size: 30px;
+  color: #6B99C3;
+}
+.user_page_mess {
+  padding: 10px 0 5px 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eef0f3;
+}
+.drop_mess {
+  color: #f36b6b;
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+}
+.user_page_row {
+  padding: 40px 20px;
+}
+.user_page_mess {
+  list-style: none;
+}
+.user_page_mess-text {
+  font-size: 20px;
+  padding-left: 10px;
+}
+
+.btn.link {
+  text-decoration: none;
+}
+.message__inner-amount {
+  font-size: 13px;
+  opacity: 0.5;
+}
+.btn_group {
+  display: flex;
+}
+.btn_group a,
+.btn_group button{
+  margin: 0 5px;
+}
+.btn.drop {
+  background: #f36b6b;
 }
