@@ -6,12 +6,11 @@ session_start();
 <?
 //реализуем кнопку удаления
 foreach($_SESSION['one_user'] as $key => $value) {
-  $_SESSION['drop_message'] = $value;
   if($_GET['val'] == $key) {
     unset($_SESSION['one_user'][$key]);
+    redirect();
   } 
 }
-
 ?>
 
 <div class="message__row">
