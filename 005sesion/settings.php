@@ -1,6 +1,7 @@
 <?php
 //error_reporting(-1);
 require_once 'function.php';
+require_once 'class/userMessage.php';
 session_start();
 
 unset($_SESSION['error_user_name']);
@@ -25,15 +26,20 @@ if(iconv_strlen($message) < 1 || empty($message)) {
   redirect();
 }
 
-//если поля не пустые, то создаем массив с сессией 
-$_SESSION['arr'][] = ['name'=> $name, 'masseg' => $message, 'check' => $checkbox];
+//массив, который выводит кажно сообщения пользователя и его имя
+//$_SESSION['arr'][] = ['name'=> $name, 'masseg' => $message, 'check' => $checkbox];
 $_SESSION['done_mass'] = 'Вы успешно отправили письмо';
-
 //получаем все сообщения одного пользователя. 
 $_SESSION['one_user'][$name][] = $message;
 
-redirect();
-
-/*вывести только имя и последнее сообщение, по клику на имени вывести на другой страничке
- все сообщения от этого имени, по клику на кнопке рядом с именем удалить имя и все сообщения от этого имени*/
+/**
+ * OOП
+*/
+$_SESSION['one_user_oop'][$name][] = new userMessage($name, $message);
+foreach($_SESSION['one_user_oop'] as $key => $elem) {
+  for($i = 0; $i < count($elem); $i++) {
+    echo $elem[$i]->getMessages() . '<br>';
+  }
+}
+//redirect();
 ?>
