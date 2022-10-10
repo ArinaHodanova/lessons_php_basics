@@ -2,6 +2,16 @@
 //error_reporting(-1);
 header("Content-type: text/html; charset=utf-8");
 session_start();
+
+echo '<pre>';
+print_r($_SESSION['one_user']);
+echo '</pre>'; 
+
+/*echo '<pre>';
+var_dump($_SESSION['one_user_oop']);
+echo '</pre>';*/
+
+//unset($_SESSION['one_user_oop']);
 ?>
 
 <html lang="ru">
@@ -36,5 +46,6 @@ session_start();
 </form>
 
 <?
-require_once 'lastWord.php';
+//require_once 'lastWord.php';
+require_once 'lastWordOOP.php';
 ?>
