@@ -13,6 +13,14 @@ if(empty($pictures_tmp)) {
   exit;
 }
 
+//проверяем что бы файл был картинкой
+$formats_img = array("image/png", "image/gif", "image/jpeg", "image/svg+xml");
+if(!in_array($pictures_type, $formats_img)) {
+  $_SESSION['error'] = 'Данный функционал только для загрузки картинок';
+  header("Location: index.php");
+  exit;
+}
+
 //коннектимся с БД
 require_once __DIR__ . '/db.php';
 
@@ -44,5 +52,4 @@ move_uploaded_file($pictures_tmp, $filedir);
 $_SESSION['done'] = 'Файл загружен';
 //header("Location: index.php");
 //exit;
-
 ?>
