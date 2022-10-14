@@ -52,6 +52,7 @@ body {
 
 .form {
   margin-top: 20px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -164,4 +165,87 @@ body {
 }
 .btn.drop {
   background: #f36b6b;
+}
+
+
+/*ООП*/
+.message__container {
+  position: relative;
+  border-radius: 4px;
+  padding: 15px 23px;
+  background: #6b99c3;
+  align-items: baseline;
+  margin-bottom: 20px;
+}
+.message__container::before {
+  content: '';
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('img/quotes.svg');
+  width: 50px;
+  height: 50px;
+  right: 10;
+  top: 10;
+  opacity: 0.7;
+}
+.message__container:last-child {
+  margin-bottom: 0;
+}
+.message_btn {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+.messages__row {
+  margin: auto;
+  max-width: 400px;
+}
+
+.message__inner-drop,
+.message__inner-link.btn {
+  text-align: center;
+  border-radius: 6px;
+  font-size: 15px;
+  margin: 0;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+}
+.message__inner-drop {
+  color: #ffffff;
+  background: #f56b6b;
+}
+.message__inner-link.btn {
+  color: #6B99C3;
+  background: #fff;
+}
+.message__field {
+  margin-right: 6px;
+  font-size: 15px;
+}
+.message__inner-nam .message__name {
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 23px;
+  color: #ffffff;
+}
+.message__inner-nam {
+ margin-bottom: 10px;
+}
+.message__inner-nam:last-child {
+  margin-bottom: 0;
+ }
+.message__text.plain {
+  color: #ffffff;
+  font-weight: normal;
+}
+.message__text.big {
+  font-weight: 900;
+  color: #000000;
+}
+.message__inner-nam.message {
+  display: flex;
 }
