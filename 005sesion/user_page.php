@@ -1,4 +1,5 @@
 <?
+require_once 'function.php';
 session_start();
 ?>
 
@@ -12,20 +13,28 @@ session_start();
 
 <h1 class="title_user">Все сообщения: <span><?=$_GET['name']?></span></h1>
 
+
 <?foreach($_SESSION['one_user'] as $key => $elem):?>
   <?if($_GET['name'] == $key):?>
       <ul class="user_page_row">
         <!--Показываем сообщения от новых к старому-->
-        <?for($i = count($elem) - 1; $i >= 0; $i--):?>
+        <?for($i = count($elem) - 1; $i >= 0 ; $i--):?>
           <li class="user_page_mess">
             <span class="user_page_mess-text"><?=$elem[$i]?></span>
           </li>
         <?endfor?>
       </ul>
+
+      <div class="btn_group">
+        <a href="index.php" class="btn link">Вернуться в чат</a>
+        <a class="btn drop" href="index.php?val=<?=$key?>">Удалить</a></a>
+      <div>
+
+      <?//реализуем кнопку удаления
+      if($_GET['val'] == $key) {
+        unset($_SESSION['one_user'][$key]);
+        redirect();
+      }
+      ?>
   <?endif?>
 <?endforeach?>
-
-<div class="btn_group">
-  <a href="index.php" class="btn link">Вернуться в чат</a>
-  <button class="btn drop" type="submit" name="submit" value="on">Удалить все сообщения</a></button>
-<div>
