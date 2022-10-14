@@ -35,11 +35,11 @@ $_SESSION['one_user'][$name][] = $message;
 /**
  * OOП
 */
-$_SESSION['one_user_oop'][$name][] = new userMessage($name, $message);
-foreach($_SESSION['one_user_oop'] as $key => $elem) {
-  for($i = 0; $i < count($elem); $i++) {
-    echo $elem[$i]->getMessages() . '<br>';
-  }
-}
-//redirect();
+
+echo '<pre>';
+var_dump($_SESSION['one_user_oop']);
+echo '</pre>';
+
+$_SESSION['one_user_oop'][$name][] = new userMessage($name, $message, $checkbox);
+redirect();
 ?>
