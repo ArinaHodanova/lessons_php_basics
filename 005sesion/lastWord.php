@@ -1,21 +1,19 @@
 <?
 require_once 'function.php';
-session_start();
-?>
-
-<?
-//реализуем кнопку удаления
-foreach($_SESSION['one_user'] as $key => $value) {
-  if($_GET['val'] == $key) {
-    unset($_SESSION['one_user'][$key]);
-    redirect();
-  } 
-}
 ?>
 
 <div class="message__row">
 <?if(!empty($_SESSION['one_user'])):?>
 <?foreach($_SESSION['one_user'] as $key => $elem):?>
+
+  <?//реализуем кнопку удаления
+  if(!empty($_GET['val'])) {
+    if($_GET['val'] == $key) {
+      unset($_SESSION['one_user'][$key]);
+      redirect();
+    }
+  }
+  ?>
 
   <?$amount = count($elem)?>
 
@@ -27,6 +25,7 @@ foreach($_SESSION['one_user'] as $key => $value) {
       <!--.Педедаем имя гет параметром-->
       <span class="message__inner-amount">(<?=$amount?> шт.)</span>
     </p>
+    
     <p class="message__inner-nam">
       <span class="message__inner-name">Сообщение: </span>
       <span class="message__inner-massage">
