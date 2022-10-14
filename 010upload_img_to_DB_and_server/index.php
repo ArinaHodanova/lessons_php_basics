@@ -6,12 +6,10 @@ require_once __DIR__ . '/db.php';
 <html lang="en">
 <head>
         <meta charset="utf-8">
-        <meta name="description" content="Chartist.html">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
-    </head>
+</head>
     <body>
         <main>
             <div class="container">
@@ -69,15 +67,5 @@ require_once __DIR__ . '/db.php';
 
 
         </main>
-        
-
-        <script src="js/vendors.bundle.js"></script>
-        <script src="js/app.bundle.js"></script>
-        <script>
-            // default list filter
-            initApp.listFilter($('#js_default_list'), $('#js_default_list_filter'));
-            // custom response message
-            initApp.listFilter($('#js-list-msg'), $('#js-list-msg-filter'));
-        </script>
     </body>
 </html>
