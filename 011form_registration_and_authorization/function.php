@@ -149,11 +149,21 @@ function authorizationUser($email, $password, $db) {
     redirect_to('login.php');
     return false;
   }
-
-  //записываем пользователя в сессию
-  setFlashMassege('user', ['id' => $result['id'], 'email' => $result['email']]);
-  setFlashMassege('messege', 'Вы авторизовались');
+  setFlashMassege('user', ['id' => $result['id'], 'email' => $email, 'role' =>  $result['role']]);
   return true;
 }
 
+/*
+  Parameters:
+    string - $name
+  Desctiptiop: проверяем залогинен ли пользователь
+  Return value: bool
+*/
+function isNotLoggedIn() {
+  if(empty($_SESSION['user'])) {
+    return true;
+  } else {
+    return false;
+  }
+}
 ?>
