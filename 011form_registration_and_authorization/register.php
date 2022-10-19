@@ -11,28 +11,14 @@ checkfFieldEmptiness($email, $password, $verific_password, 'registration.php');/
 checkfPassword($password, 'registration.php');//проверяем пароль колличество символов
 checkfPasswordVerific($password, $verific_password, 'registration.php');//проверяем подтверждение пароля
 
-/*
-  Parameters:
-    object - $db
-    string - $verific_password
-  Desctiptiop: получить пользователя по емайл
-  Return value: arry
-*/
-$uzer = getUzerByEmail($email, $db);
+$user = getUzerByEmail($email, $db);
 
 //если майл уже есть, перекинуть пользователя на страницу авторизации
-if(!empty($uzer)) {
+if(!empty($user)) {
   setFlashMassege('danger', 'Электронный адрес  уже существует');
   redirect_to('registration.php');
 }
 
-/*
-  Parameters:
-    object - $db
-    string - $verific_password
-  Desctiptiop: делаем запрос есть ли в БД такая почта
-  Return value: arry
-*/
 addUzer($email, $password, $db);//если пользователя нет, то сохраняем его в БД
 
 //перекидываем на страницу авторизации
