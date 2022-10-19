@@ -8,5 +8,7 @@ $password = $_POST['password'];
 
 checkfFieldEmptiness($email, $password, null, 'login.php');//проверяем поля на пустоту
 
-authorizationUser($email, $password, $db);//запрос на существование емайл в БД
+if(authorizationUser($email, $password, $db)) {//авторизация пользователя
+  redirect_to('users.php');
+}
 ?>
