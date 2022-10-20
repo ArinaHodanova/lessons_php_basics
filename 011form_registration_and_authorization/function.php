@@ -166,4 +166,67 @@ function isNotLoggedIn() {
     return false;
   }
 }
+
+/*
+  Parameters:
+    string - $name
+  Desctiptiop: проверяем залогинен ли пользователь
+  Return value: bool
+*/
+function isNotLoggedIn() {
+  if(empty($_SESSION['user'])) {
+    return true;
+  } 
+    return false;
+}
+
+/*
+  Parameters:
+    string - $name
+  Desctiptiop: вычисляем роль пользователя
+  Return value: string 
+*/
+function getCurrentUser() {
+  return $_SESSION['user']['role'];
+}
+
+/*
+  Parameters:
+    string - getCurrentUser() - роль пользователя
+  Desctiptiop: проверяем админ ли пользователь
+  Return value: bool
+*/
+function isAdmin($role) {
+  if($role == 'admin') {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+/*
+  Parameters:
+  Desctiptiop: вывод пользователей
+  Return value: array
+*/
+function getUsers($db) {
+  $sql = "SELECT * FROM `users_list`";
+  $stat = $db->prepare($sql);
+  $stat->execute();
+  $result = $stat->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}
+
+/*
+  Parameters:
+    array - $name
+  Desctiptiop: открываем возможности редактировать свой профиль пользователю
+  Return value: bool
+*/
+function isOwner($user) {
+  if($_SESSION['user']['email'] == $user['email']) {
+    return true;
+  }
+  return false;
+}
 ?>
