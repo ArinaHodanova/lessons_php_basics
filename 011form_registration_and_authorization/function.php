@@ -17,12 +17,12 @@ function checkfFieldEmptiness($email, $password, $verific_password, $redirect_li
     redirect_to($redirect_list);
   }
   if(empty($password)) {
-    setFlashMassege('error', 'Поле пароль не должно быть пустое');
+    setFlashMassege('error', 'Введите пароль');
     redirect_to($redirect_list);
   }
   if(isset($verific_password)) {
     if(empty($verific_password)) {
-      setFlashMassege('error', 'Заполните поле подтверждение пароля');
+      setFlashMassege('error', 'Подтвердите пароль');
       redirect_to($redirect_list);
     }
   }
@@ -130,7 +130,7 @@ function addUzer($email, $password, $db) {
     string - $name
     string - $password
     object - $db
-  Desctiptiop: авторизация пользователя
+  Desctiptiop: авторизация пользователя и добавление в сессию
   Return value: bool
 */
 function authorizationUser($email, $password, $db) {
@@ -155,53 +155,48 @@ function authorizationUser($email, $password, $db) {
 
 /*
   Parameters:
-    string - $name
-  Desctiptiop: проверяем залогинен ли пользователь
+  Desctiptiop: проверяем авторизован ли пользователь
   Return value: bool
 */
-function isNotLoggedIn() {
-  if(empty($_SESSION['user'])) {
+function isLoggedIn() {
+  if(isset($_SESSION['user'])) {
     return true;
-  } else {
-    return false;
-  }
+  }  
+  return false;
 }
 
 /*
   Parameters:
-    string - $name
-  Desctiptiop: проверяем залогинен ли пользователь
+  Desctiptiop: если пользовател не авторизован
   Return value: bool
 */
 function isNotLoggedIn() {
-  if(empty($_SESSION['user'])) {
-    return true;
-  } 
-    return false;
+  return !isLoggedIn();
 }
 
 /*
   Parameters:
-    string - $name
   Desctiptiop: вычисляем роль пользователя
   Return value: string 
 */
-function getCurrentUser() {
-  return $_SESSION['user']['role'];
+function getAuthenticatedUser() {
+  if(isLoggedIn()) {
+    return $_SESSION['user'];
+  }
+  return false;
 }
 
 /*
   Parameters:
-    string - getCurrentUser() - роль пользователя
+    string - getAuthenticatidUser() - роль пользователя
   Desctiptiop: проверяем админ ли пользователь
   Return value: bool
 */
 function isAdmin($role) {
-  if($role == 'admin') {
+  if($role['role'] == 'admin') {
     return true;
-  } else {
+  } 
     return false;
-  }
 }
 
 /*
@@ -219,12 +214,13 @@ function getUsers($db) {
 
 /*
   Parameters:
-    array - $name
+    array - $user
+    array - $authenticatedUser
   Desctiptiop: открываем возможности редактировать свой профиль пользователю
   Return value: bool
 */
-function isOwner($user) {
-  if($_SESSION['user']['email'] == $user['email']) {
+function isIdentical($user, $authenticatedUser) {
+  if($user['email'] == $authenticatedUser['email']) {
     return true;
   }
   return false;
