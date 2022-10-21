@@ -97,14 +97,17 @@ function checkfPasswordVerific($password, $verific_password, $redirect_list) {
     string - $email
     object - $db
   Desctiptiop: поиск пользователя по емайл
-  Return value: arry
+  Return value: bool
 */
 function getUzerByEmail($email, $db) {  
   $sql = "SELECT * FROM `users_reg`WHERE email=:email";
   $stat = $db->prepare($sql);
   $stat->execute(['email' => $email]);
   $result = $stat->fetch(PDO::FETCH_ASSOC);
-  return $result;
+  if(!empty($result)) {
+    return true;
+  }
+  return false;
 }
 
 /*
