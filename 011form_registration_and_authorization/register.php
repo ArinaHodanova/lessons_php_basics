@@ -7,8 +7,8 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 $verific_password = $_POST['verific_password'];//подтверждение пароля
 
-checkfFieldEmptiness($email, $password, $verific_password, 'registration.php');//проверяем поля на пустоту
-checkfPassword($password, 'registration.php');//проверяем пароль колличество символов
+checkfFieldEmptiness($email, $password, $verific_password, null, 'registration.php');//проверяем поля на пустоту;
+checkfPassword($password, 'registration.php');//проверяем пароль количество символов
 checkfPasswordVerific($password, $verific_password, 'registration.php');//проверяем подтверждение пароля
 
 //если майл уже есть 
