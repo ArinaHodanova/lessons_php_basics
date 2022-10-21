@@ -11,7 +11,13 @@ require_once __DIR__ . '/db.php';
   Desctiptiop: проверка полей на пустоту 
   Return value: null
 */
-function checkfFieldEmptiness($email, $password, $verific_password, $redirect_list) {
+function checkfFieldEmptiness($email, $password, $verific_password, $name, $redirect_list) {
+  if(isset($name)) {
+    if(empty($name)) {
+      setFlashMassege('error', 'Введите имя');
+      redirect_to($redirect_list);
+    }
+  }
   if(empty($email)) {
     setFlashMassege('error', 'Введите почту');
     redirect_to($redirect_list);
@@ -118,8 +124,8 @@ function getUzerByEmail($email, $db) {
   Desctiptiop: добавляем нового пользователя в БД
   Return value: int
 */
-function addUzer($email, $password, $db) {
-  $sql = "INSERT INTO `users_reg` (`email`, `password`) VALUES (:email, :password)";
+function addUzer($email, $password, $db, $table) {
+  $sql = "INSERT INTO $table (`email`, `password`) VALUES (:email, :password)";
   $stat = $db->prepare($sql);
   $stat->execute([
     'email' => $email, 
