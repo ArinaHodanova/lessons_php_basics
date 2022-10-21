@@ -12,7 +12,7 @@ checkfPassword($password, 'registration.php');//проверяем пароль 
 checkfPasswordVerific($password, $verific_password, 'registration.php');//проверяем подтверждение пароля
 
 //если майл уже есть 
-if(getUzerByEmail($email, $db)) {
+if(getUzerByEmail($email, $db, $users_reg_table)) {
   setFlashMassege('danger', 'Электронный адрес  уже существует');
   redirect_to('registration.php');
 }
