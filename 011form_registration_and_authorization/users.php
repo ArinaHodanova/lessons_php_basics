@@ -5,9 +5,10 @@ require_once __DIR__ . '/db.php';
 //если пользователь не авторизован перебрасываем на страницу авторизации 
 if(isNotLoggedIn()) {
   redirect_to('login.php');
-} 
+}
 
 $users = getUsers($db);//получаем массив пользователей
+
 ?>
 
 <!DOCTYPE html>
@@ -31,8 +32,7 @@ $users = getUsers($db);//получаем массив пользователе�
     <h2>Список пользователей</h2>
 
     <?//проверяем админ ли пользователь или нет?>
-
-    <?if(isAdmin(getCurrentUser())):?>
+    <?if(isAdmin(getAuthenticatedUser())):?>
       <div>
         <a href="create.php" type="button" class="btn btn-warning">Добавить пользователя</a>
       </div>
@@ -41,24 +41,29 @@ $users = getUsers($db);//получаем массив пользователе�
       <div class="row js-list-filter" id="js-contacts">
                   <?foreach($users as $user):?>
                   <div class="col-xl-4">
-                    <div id="c_1" class="card border shadow-0 mb-g shadow-sm-hover" data-filter-tags="oliver kopyov" <?=(isOwner($user))? "style=background-color:#ffeaea;": false ?>>
+                    <div id="c_1" class="card border shadow-0 mb-g shadow-sm-hover" data-filter-tags="oliver kopyov" <?=(isIdentical($user, getAuthenticatedUser()))? "style=background-color:#ffeaea;": false ?>>
                         <div class="card-body border-faded border-top-0 border-left-0 border-right-0 rounded-top">
                             <div class="d-flex flex-row align-items-center">
                                 <span class="status status-success mr-3">
                                     <span class="rounded-circle profile-image d-block " style="background-image:url(<?=$user['image']?>); background-size: cover;"></span>
                                 </span>
                                 <div class="info-card-text flex-1">
-                                    <a><?=$user['username']?></a>
-                                    <?if(isAdmin(getCurrentUser()) || isOwner($user)):?>
+                                    <?if(isIdentical($user, getAuthenticatedUser())):?>
+                                      <a href=""><?=$user['username']?></a>
+                                    <?else:?>
+                                      <a><?=$user['username']?></a>
+                                    <?endif?>
+                                    <?if(isAdmin(getAuthenticatedUser()) || isIdentical($user, getAuthenticatedUser())):?>
                                     <a href="javascript:void(0);" class="fs-xl text-truncate text-truncate-lg text-info" data-toggle="dropdown" aria-expanded="false">
                                       <i class="fa fa-cog" aria-hidden="true"></i>
                                     </a>
-                                    <?endif?>
                                     <div class="dropdown-menu" style="">
-                                        <a class="dropdown-item" href="#">Редактировать</a>
-                                        <a class="dropdown-item" href="#">Удалить</a>
+                                        <a class="dropdown-item" href="edit.html">Редактировать</a>
+                                        <a class="dropdown-item" href="security.html">Безопасность</a>
+                                        <a class="dropdown-item" href="status.html">Установить статус</a>
+                                        <a class="dropdown-item" href="media.html">Загрузить аватар</a>
                                     </div>
-
+                                    <?endif?>
 
                                     <span class="text-truncate text-truncate-xl"><?=$user['job_title']?></span>
                                 </div>
@@ -95,7 +100,6 @@ $users = getUsers($db);//получаем массив пользователе�
                   <?endforeach?>
                                 
         </div><!--/row-->
-
 
         <script src="js/vendors.bundle.js"></script>
         <script src="js/app.bundle.js"></script>
@@ -162,14 +166,13 @@ $users = getUsers($db);//получаем массив пользователе�
                         $('#js-contacts .js-expand-btn').removeClass('d-none');
                         $('#js-contacts .card-body + .card-body').removeClass('show');
                     }
-
                 });
 
                 //initialize filter
                 initApp.listFilter($('#js-contacts'), $('#js-filter-contacts'));
             });
-        </script>
 
+        </script>
   </main>
 </body>
   
