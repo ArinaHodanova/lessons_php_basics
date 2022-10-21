@@ -57,11 +57,11 @@ $users = getUsers($db);//получаем массив пользователе�
                                     <a href="javascript:void(0);" class="fs-xl text-truncate text-truncate-lg text-info" data-toggle="dropdown" aria-expanded="false">
                                       <i class="fa fa-cog" aria-hidden="true"></i>
                                     </a>
-                                    <div class="dropdown-menu" style="">
-                                        <a class="dropdown-item" href="edit.html">Редактировать</a>
-                                        <a class="dropdown-item" href="security.html">Безопасность</a>
-                                        <a class="dropdown-item" href="status.html">Установить статус</a>
-                                        <a class="dropdown-item" href="media.html">Загрузить аватар</a>
+                                   <div class="dropdown-menu" style="">
+                                        <a class="dropdown-item" href="edit.html?id=<?=$user['id']?>">Редактировать</a>
+                                        <a class="dropdown-item" href="security.html?id=<?=$user['id']?>">Безопасность</a>
+                                        <a class="dropdown-item" href="status.html?id=<?=$user['id']?>">Установить статус</a>
+                                        <a class="dropdown-item" href="media.html?id=<?=$user['id']?>">Загрузить аватар</a>
                                     </div>
                                     <?endif?>
 
