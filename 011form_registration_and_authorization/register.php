@@ -11,10 +11,8 @@ checkfFieldEmptiness($email, $password, $verific_password, 'registration.php');/
 checkfPassword($password, 'registration.php');//проверяем пароль колличество символов
 checkfPasswordVerific($password, $verific_password, 'registration.php');//проверяем подтверждение пароля
 
-$user = getUzerByEmail($email, $db);
-
-//если майл уже есть, перекинуть пользователя на страницу авторизации
-if(!empty($user)) {
+//если майл уже есть 
+if(getUzerByEmail($email, $db)) {
   setFlashMassege('danger', 'Электронный адрес  уже существует');
   redirect_to('registration.php');
 }
