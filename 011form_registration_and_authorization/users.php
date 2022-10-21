@@ -8,7 +8,6 @@ if(isNotLoggedIn()) {
 }
 
 $users = getUsers($db);//получаем массив пользователей
-
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +33,7 @@ $users = getUsers($db);//получаем массив пользователе�
     <?//проверяем админ ли пользователь или нет?>
     <?if(isAdmin(getAuthenticatedUser())):?>
       <div>
-        <a href="create.php" type="button" class="btn btn-warning">Добавить пользователя</a>
+        <a href="add_user.php?id=<?=$_SESSION['user']['id']?>" type="button" class="btn btn-warning">Добавить пользователя</a>
       </div>
     <?endif?>
 
