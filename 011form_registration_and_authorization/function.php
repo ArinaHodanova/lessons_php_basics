@@ -1,7 +1,7 @@
 <?
 error_reporting(-1);
 session_start();
-require_once __DIR__ . '/db.php';
+
 /*
   Parameters:
     string - $email
@@ -11,13 +11,7 @@ require_once __DIR__ . '/db.php';
   Desctiptiop: проверка полей на пустоту 
   Return value: null
 */
-function checkfFieldEmptiness($email, $password, $verific_password, $name, $redirect_list) {
-  if(isset($name)) {
-    if(empty($name)) {
-      setFlashMassege('error', 'Введите имя');
-      redirect_to($redirect_list);
-    }
-  }
+function checkfFieldEmptiness($email, $password, $verific_password, $redirect_list) {
   if(empty($email)) {
     setFlashMassege('error', 'Введите почту');
     redirect_to($redirect_list);
@@ -32,6 +26,7 @@ function checkfFieldEmptiness($email, $password, $verific_password, $name, $redi
       redirect_to($redirect_list);
     }
   }
+
 }
 
 /*
@@ -105,8 +100,8 @@ function checkfPasswordVerific($password, $verific_password, $redirect_list) {
   Desctiptiop: поиск пользователя по емайл
   Return value: bool
 */
-function getUzerByEmail($email, $db) {  
-  $sql = "SELECT * FROM `users_reg`WHERE email=:email";
+function getUzerByEmail($email, $db, $table) {  
+  $sql = "SELECT * FROM `$table` WHERE email=:email";
   $stat = $db->prepare($sql);
   $stat->execute(['email' => $email]);
   $result = $stat->fetch(PDO::FETCH_ASSOC);
@@ -121,17 +116,53 @@ function getUzerByEmail($email, $db) {
     string - $password
     string - $email
     object - $db
+    string - $table
   Desctiptiop: добавляем нового пользователя в БД
-  Return value: int
+  Return value: int (user id)
 */
 function addUzer($email, $password, $db, $table) {
-  $sql = "INSERT INTO $table (`email`, `password`) VALUES (:email, :password)";
-  $stat = $db->prepare($sql);
-  $stat->execute([
-    'email' => $email, 
-    'password' => password_hash($password, PASSWORD_DEFAULT)
-  ]);
-  return $db->lastInsertId();
+  if(isset($password)) {
+    $sql = "INSERT INTO `$table` (`email`, `password`) VALUES (:email, :password)";
+    $stat = $db->prepare($sql);
+    $stat->execute([
+      'email' => $email, 
+      'password' => password_hash($password, PASSWORD_DEFAULT)
+    ]);
+    return $db->lastInsertId();
+  }
+
+  if(!isset($password)) {
+    $sql = "INSERT INTO `$table` (`email`) VALUES (:email)";
+    $stat = $db->prepare($sql);
+    $stat->execute([
+      'email' => $email, 
+    ]);
+    return $db->lastInsertId();
+  }
+}
+
+/*
+  Parameters:
+    string - $name
+    string - $work
+    string - $tel
+    string - $adress
+    string - $id
+    object - $db
+    string - $table
+  Desctiptiop: добавляем информацию о пользователе
+  Return value: bool
+*/
+function editInformation($name, $work, $tel, $adress, $id, $db, $table) { 
+  $sql = "UPDATE `$table` SET username = :name, job_title = :job, phone = :phone, address = :address WHERE id=:id";
+  $stmt = $db->prepare($sql);
+  $stmt->bindValue(":id", $id);
+  $stmt->bindValue(":name", $name);
+  $stmt->bindValue(":job", $work);
+  $stmt->bindValue(":phone", $tel);
+  $stmt->bindValue(":address", $adress);
+  $stmt->execute();
+  return true;
 }
 
 /*
@@ -142,8 +173,8 @@ function addUzer($email, $password, $db, $table) {
   Desctiptiop: авторизация пользователя и добавление в сессию
   Return value: bool
 */
-function authorizationUser($email, $password, $db) {
-  $sql = "SELECT * FROM `users_reg`WHERE email=:email";
+function authorizationUser($email, $password, $db, $table) {
+  $sql = "SELECT * FROM `$table` WHERE email=:email";
   $stat = $db->prepare($sql);
   $stat->execute(['email' => $email]);
   $result = $stat->fetch(PDO::FETCH_ASSOC);
