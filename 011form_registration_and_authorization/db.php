@@ -3,10 +3,11 @@ define('DB_DRIVER', 'mysql');
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'training');
 define('DB_USER', 'root');
-define('DB_PASSWORD', 'root');
+define('DB_PASSWORD', '');
 
 //Название таблиц
-$users_reg_table = `users_reg`;
+$users_reg_table = 'users_reg';
+$users_list_table ='users_list';
 
 try {
   $db = new PDO(DB_DRIVER.':host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
