@@ -26,7 +26,6 @@ function checkfFieldEmptiness($email, $password, $verific_password, $redirect_li
       redirect_to($redirect_list);
     }
   }
-
 }
 
 /*
@@ -143,6 +142,20 @@ function addUzer($email, $password, $db, $table) {
 
 /*
   Parameters:
+    array - $users
+  Desctiptiop: получаем id пользователя
+  Return value: int (user id)
+*/
+function getUserById($users) {
+  foreach($users as $elem ) {
+    if($_GET['id'] === $elem['id']) {
+      return $elem['id'];
+    }
+  }
+}
+
+/*
+  Parameters:
     string - $name
     string - $work
     string - $tel
@@ -162,6 +175,62 @@ function editInformation($name, $work, $tel, $adress, $id, $db, $table) {
   $stmt->bindValue(":phone", $tel);
   $stmt->bindValue(":address", $adress);
   $stmt->execute();
+  return true;
+}
+
+/*
+  Parameters:
+    string - $avatar
+    int - $id
+    object - $db
+    string - $table
+  Desctiptiop: сохраняем аватар в БД и на сервер
+  Return value: bool
+*/
+function uploadAvatar($avatar_tmp, $avatar, $id, $db, $table) { 
+  $avatar_type = pathinfo($avatar);
+
+  //проверяем допустимый формат изображения
+  if(!checkAvatarFormat($avatar_type['extension'])){
+    setFlashMassege('error', 'Такой формат изображения - ' . $avatar_type['extension'] . ' не допустим');
+    return false;
+  }
+
+  $avatar_name = uniqid($avatar_type['filename']) . '.' . $avatar_type['extension'];//формируем уникальное название
+  $path = 'uploads/' . $avatar_name;//путь к файлу
+  
+  $sql = "UPDATE `$table` SET image = :name WHERE id=:id";
+  $stmt = $db->prepare($sql);
+  $stmt->bindValue(":id", $id);
+  $stmt->bindValue(":name", $path);
+  $stmt->execute();
+
+  move_uploaded_file($avatar_tmp, $path);//сохраняем файл на сервер
+  return true;
+}
+
+function addSocialLinks($wk, $telegramm, $inst, $id, $db, $table) {
+  $sql = "UPDATE `$table` SET vk = :wk, telegram = :telegramm, instagram = :inst  WHERE id=:id";
+  $stmt = $db->prepare($sql);
+  $stmt->bindValue(":id", $id);
+  $stmt->bindValue(":wk", $wk);
+  $stmt->bindValue(":telegramm", $telegramm);
+  $stmt->bindValue(":inst", $inst);
+  $stmt->execute();
+  return true;
+}
+
+/*
+  Parameters:
+    string - $type
+  Desctiptiop: проверяем формат изображения
+  Return value: bool
+*/
+function checkAvatarFormat($type) {
+  $arr = ['SVG', 'jpg', 'jpeg', 'gif', 'png', 'svg'];
+  if (!in_array($type, $arr)) {
+    return false;
+  }
   return true;
 }
 
@@ -244,8 +313,8 @@ function isAdmin($role) {
   Desctiptiop: вывод пользователей
   Return value: array
 */
-function getUsers($db) {
-  $sql = "SELECT * FROM `users_list`";
+function getUsers($db, $table) {
+  $sql = "SELECT * FROM `$table`";
   $stat = $db->prepare($sql);
   $stat->execute();
   $result = $stat->fetchAll(PDO::FETCH_ASSOC);
@@ -264,5 +333,20 @@ function isIdentical($user, $authenticatedUser) {
     return true;
   }
   return false;
+}
+
+/*
+  Parameters:
+    array - $users
+    num - $id
+  Desctiptiop: проверяем является ли пользователь владельцем своего профиля 
+  Return value: bool
+*/
+function isAvtor($users, $id) {
+  foreach($users as $elem) { 
+    if(isIdentical($elem, getAuthenticatedUser()) && $id == $elem['id']) {
+      return true;
+    }
+  }
 }
 ?>
