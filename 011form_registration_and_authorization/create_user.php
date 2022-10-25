@@ -27,4 +27,10 @@ $id = addUzer($email_user, null, $db, $users_list_table);
 
 //добавляем информацию о пользователе
 editInformation($name_user, $work_user, $tel_user, $adress_user, $id, $db, $users_list_table);
+
+if(!empty($avatar)){
+  uploadAvatar($avatar_tmp, $avatar, $id, $db, $users_list_table);//сохраняем аватар в БД и на сервер
+}
+
+addSocialLinks($wk, $telegramm, $inst, $id, $db, $users_list_table) //передаем соц сети
 ?>
