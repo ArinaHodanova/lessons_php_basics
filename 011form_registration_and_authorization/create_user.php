@@ -33,4 +33,6 @@ if(!empty($avatar)){
 }
 
 addSocialLinks($wk, $telegramm, $inst, $id, $db, $users_list_table) //передаем соц сети
+setFlashMassege('danger', 'Профиль упешно создан');
+redirect_to('users.php');
 ?>
