@@ -29,6 +29,15 @@ $users = getUsers($db);//получаем массив пользователе�
 <body>
   <main class="page-content">
     <h2>Список пользователей</h2>
+    
+    <?if(!empty($_SESSION['danger'] )):?>
+      <div class="alert alert-primary col-xl-4" role="alert"><?=displayFlashMassege('danger')?></div>
+    <?endif?>
+    
+    <!--если пользователь пытается отредактировать не свою страницуы-->
+    <?if(!empty($_SESSION['error'] )):?>
+      <div class="alert alert-danger col-xl-4" role="alert"><?=displayFlashMassege('error')?></div>
+    <?endif?>
 
     <?//проверяем админ ли пользователь или нет?>
     <?if(isAdmin(getAuthenticatedUser())):?>
