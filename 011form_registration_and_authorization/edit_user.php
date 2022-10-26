@@ -20,5 +20,5 @@ $id = getUserById($users);//получаем id пользователя, чей
 
 editInformation($user_name, $user_work, $user_tel, $user_adress, $id, $db, $users_list_table);
 setFlashMassege('danger', 'Профиль упешно обновлен');
-redirect_to('user_profil.php');
+redirect_to('user_profil.php?id='.$id_page);
 ?>
