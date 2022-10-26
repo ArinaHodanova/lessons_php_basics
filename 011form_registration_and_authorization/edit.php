@@ -19,7 +19,7 @@ if(!isAdmin(getAuthenticatedUser())) {
   }
 }
 
-//если пользователь не админ и заходит на страничку своего пользователя
+//если пользователь админ и заходит на страничку своего пользователя
 if(isAdmin(getAuthenticatedUser())) { 
   if(isAvtor($users, $_GET['id'])) {
       setFlashMassege('danger', 'Вы редактируете свой профиль');
