@@ -27,9 +27,12 @@ echo '</pre>';
                   <div class="vssd"><?=displayFlashMassege('error')?></div>
                 <?endif?>
 
-                <!--после регистрации-->
                 <?if(!empty($_SESSION['success'])):?>
                   <div><?=displayFlashMassege('success')?></div>
+                <?endif?>
+
+                <?if(!empty($_SESSION['danger'] )):?>
+                  <div><?=displayFlashMassege('danger')?></div>
                 <?endif?>
 
                 <form action="auth.php" method="post">
