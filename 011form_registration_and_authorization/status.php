@@ -61,8 +61,7 @@ if(isset($get_status)) {
     <h1>Установить статус</h1>
         <div class="row">
             <div class="col-4">
-
-            <?//status_form.php?id=<?=$id_page?>
+              
               <form action="" method="post">
                 <select name="user_status">
                   <?foreach($arr_status as $value):?>
