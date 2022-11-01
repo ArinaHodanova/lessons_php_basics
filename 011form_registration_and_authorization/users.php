@@ -70,6 +70,7 @@ $users = getUsers($db);//получаем массив пользователе�
                                         <a class="dropdown-item" href="security.html?id=<?=$user['id']?>">Безопасность</a>
                                         <a class="dropdown-item" href="status.html?id=<?=$user['id']?>">Установить статус</a>
                                         <a class="dropdown-item" href="media.html?id=<?=$user['id']?>">Загрузить аватар</a>
+                                        <a class="dropdown-item" href="delete.php?id=<?=$user['id']?>">Удалить аватар</a>
                                     </div>
                                     <?endif?>
 
