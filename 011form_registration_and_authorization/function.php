@@ -26,6 +26,7 @@ function checkfFieldEmptiness($email, $password, $verific_password, $redirect_li
       redirect_to($redirect_list);
     }
   }
+
 }
 
 /*
@@ -96,7 +97,7 @@ function checkfPasswordVerific($password, $verific_password, $redirect_list) {
   Parameters:
     string - $email
     object - $db
-  Desctiptiop: поиск пользователя по емайл
+  Desctiptiop: поиск повторяющегося емайл
   Return value: bool
 */
 function getUzerByEmail($email, $db, $table) {  
@@ -109,6 +110,40 @@ function getUzerByEmail($email, $db, $table) {
   }
   return false;
 }
+
+/*
+  Parameters:
+    object - $db
+    string - $status_table
+  Desctiptiop: получаем массив с статусов
+  Return value: arr
+*/
+function getArrStatus($db, $table) {  
+  $sql = "SELECT * FROM `$table`";
+  $stat = $db->prepare($sql);
+  $stat->execute();
+  return $stat->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/*
+  Parameters:
+    object - $db
+    string - $id
+    string - $table
+  Desctiptiop: получаем статус текущего пользовавателя
+  Return value: arr
+*/
+function getUserStatus($db, $id, $table) {  
+  $sql = "SELECT status FROM `$table` WHERE id=:id";
+  $stat = $db->prepare($sql);
+  $stat->bindValue(":id", $id);
+  $stat->execute();
+  $result = $stat->fetch(PDO::FETCH_ASSOC);
+  foreach($result as $elem) {
+    return $elem;
+  }
+}
+
 
 /*
   Parameters:
@@ -156,6 +191,36 @@ function getUserById($users) {
 
 /*
   Parameters:
+    array - $users
+    array - id
+  Desctiptiop: получили емайл пользователя
+  Return value: string
+*/
+function getUserByEmail($users, $id) {
+  foreach($users as $user) {
+    if($id == $user['id']) {
+      return $user['email'];
+    }
+  }
+}
+
+/*
+  Parameters:
+    array - $users
+    string - $email
+  Desctiptiop: получили id пользователя по почте
+  Return value: string
+*/
+function getUserOwnerById($users, $email) {
+  foreach($users as $user) { 
+    if($user['email'] == $email) {
+      return $user['id'];
+    }
+  }
+}
+
+/*
+  Parameters:
     string - $name
     string - $work
     string - $tel
@@ -177,6 +242,55 @@ function editInformation($name, $work, $tel, $adress, $id, $db, $table) {
   $stmt->execute();
   return true;
 }
+
+
+/*
+  Parameters:
+    string - $email
+    string - $password
+    object - $db
+    string - $id_users
+    string - $table
+  Desctiptiop: изменяем пароль и логин пользователя
+  Return value: bool
+*/
+function editCreadentials($email, $password, $db, $id_users, $table) {
+  if(isset($password)) {
+    $sql = "UPDATE `$table` SET email = :email, password = :password WHERE id=:id";
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(":id", $id_users);
+    $stmt->bindValue(":email", $email);
+    $stmt->bindValue(":password", password_hash($password, PASSWORD_DEFAULT));
+  }
+  if(!isset($password)) {
+    $sql = "UPDATE `$table` SET email = :email WHERE id=:id";
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(":id", $id_users);
+    $stmt->bindValue(":email", $email);
+  }
+
+  $stmt->execute();
+  return true;
+}
+
+/*
+  Parameters:
+    string - $status
+    object - $db
+    string - $id_users
+    string - $table
+  Desctiptiop: изменяем статус
+  Return value: bool
+*/
+function editStatus($status, $db, $id, $table) { 
+  $sql = "UPDATE `$table` SET status = :status  WHERE id=:id";
+  $stmt = $db->prepare($sql);
+  $stmt->bindValue(":id", $id);
+  $stmt->bindValue(":status", $status);
+  $stmt->execute();
+  return true;
+}
+
 
 /*
   Parameters:
@@ -348,5 +462,55 @@ function isAvtor($users, $id) {
       return true;
     }
   }
+  return false;
+}
+
+/*
+  Parameters:
+    array - $users
+    num - $id
+    string - $email
+  Desctiptiop: получаем владельца страницы
+  Return value: bool
+*/
+
+function isOwnerProfile($users, $id_page, $email) {
+  foreach($users as $user) {
+    if($id_page == $user['id'] && $user['email'] == $email) {
+      return true;
+    }
+  }
+}
+
+/*
+  Parameters:
+    array - $users
+    num - $id
+  Desctiptiop: выбирае профиль
+  Return value: bool
+*/
+function getUserProfil($users, $id) { 
+  foreach($users as $user) {
+    if($id === $user['id']) {
+      return $user;
+    }
+  }
+  return null;
+}
+
+/*
+  Parameters:
+    object - $db
+    num - $id
+    string - $table
+  Desctiptiop: удалить пользователя из БД
+  Return value: bool
+*/
+function delet($db, $id, $table) {
+  $sql = "DELETE FROM `$table` WHERE id=:id_user";
+  $stat = $db->prepare($sql);
+  $stat->bindValue(":id_user", $id);
+  $stat->execute();
+  return true;
 }
 ?>
