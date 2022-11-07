@@ -1,8 +1,9 @@
 <?
-require_once 'DB/Connect.php';//подключение к БД
-require_once 'DB/QueryBilder.php';//выполнение запроса
+$config = require_once 'config.php';
+require_once 'DB/Connect.php';
+require_once 'DB/QueryBilder.php';
 
 return new QueryBilder(
-  Connect::make()
+  Connect::make($config['database'])
 );
 ?>
