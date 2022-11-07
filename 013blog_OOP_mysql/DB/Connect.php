@@ -2,10 +2,13 @@
 class Connect {
   private static $pdo;
 
-  public static function make() {
+  public static function make($config) {
     //подключение к БД
     try {
-      self::$pdo = new PDO('mysql:host=localhost;dbname=users_db', 'root', 'root');
+      self::$pdo = new PDO("{$config['connect']};dbname={$config['db']};charset={$config['charset']}", 
+          "{$config['username']}", 
+          "{$config['password']}"
+      );
     } catch(PDOException $exception) {
       die($exception->getMessage());
     }
