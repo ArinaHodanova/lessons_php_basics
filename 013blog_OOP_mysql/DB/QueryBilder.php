@@ -7,12 +7,11 @@ class QueryBilder {
     return $pdo;
   }
 
-  public function getAll() {
-    $stat = $this->pdo->prepare('SELECT * FROM `posts`');
+  public function getAll($table) {
+    //запрос
+    $stat = $this->pdo->prepare("SELECT * FROM {$table}");
     $stat->execute();
-    $posts = $stat->fetchAll(PDO::FETCH_ASSOC);
-
-    return $posts;
+    return $stat->fetchAll(PDO::FETCH_ASSOC);
   }
 }
 
