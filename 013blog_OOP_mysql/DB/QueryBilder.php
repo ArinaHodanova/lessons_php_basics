@@ -46,6 +46,16 @@ class QueryBilder {
     $stat->execute($data);
     dd($stat);
   }
+  
+  public function delete($table, $id) { 
+    $sql = "DELETE FROM {$table} WHERE id=:id";
+    $stat = $this->pdo->prepare($sql);
+    $stat->execute([
+      'id' => $id
+    ]);  
+    
+    dd($stat);
+  }
 
 }
 ?>
