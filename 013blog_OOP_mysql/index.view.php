@@ -39,7 +39,7 @@
       <td>
          <a href="Show.php?id=<?=$value['id']?>" class="btn btn-primary">Show</a>
         <a href="Edit.php?id=<?=$value['id']?>" class="btn btn-warning">Edit</a>
-        <a href="Delet.php" class="btn btn-danger">Delete</a>
+        <a href="Delete.php?id=<?=$value['id']?>" class="btn btn-danger" onclick="return confirm('Вы уверены ?')">Delete</a>
       </td>
     </tr>
     <?endforeach?>
