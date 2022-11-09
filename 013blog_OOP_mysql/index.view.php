@@ -6,7 +6,7 @@
   </head>
   <body>
     <div class="container">
-    <a href="#" class="btn btn-success">Add post</a>
+    <a href="create.php" class="btn btn-success">Add post</a>
     <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">My blog</a>
@@ -23,7 +23,6 @@
   </div>
 </nav>
 
-
 <table class="table">
   <thead>
     <tr>
@@ -35,10 +34,11 @@
   <tbody>
     <?foreach($posts as $value):?>
     <tr>
-      <th scope="row"><?=$value['id']?></th>
+      <th><?=$value['id']?></th>
       <td><?=$value['title']?></td>
       <td>
-        <a href="Edit.php" class="btn btn-warning">Edit</a>
+         <a href="Show.php?id=<?=$value['id']?>" class="btn btn-primary">Show</a>
+        <a href="Edit.php?id=<?=$value['id']?>" class="btn btn-warning">Edit</a>
         <a href="Delet.php" class="btn btn-danger">Delete</a>
       </td>
     </tr>
