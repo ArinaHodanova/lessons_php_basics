@@ -2,17 +2,26 @@
 class QueryBilder {
   protected $pdo;
 
-  public function __construct($pdo) {
+  public function __construct(PDO $pdo) {
     $this->pdo = $pdo;
     return $pdo;
   }
 
+  /**
+   * string $table - название таблицы
+   * return array
+  */
   public function getAll($table) {
     $stat = $this->pdo->prepare("SELECT * FROM {$table}");
     $stat->execute();
     return $stat->fetchAll(PDO::FETCH_ASSOC);
   }
 
+  /**
+   * string $table - название таблицы
+   * array $data - массив данных
+   * return array
+  */
   public function create($table, $data) {
     $keys = implode(', ', array_keys($data));
     $tags = ":" . implode(', :', array_keys($data));
@@ -23,6 +32,11 @@ class QueryBilder {
     dd($stat);
   }
 
+  /**
+   * string $table - название таблицы
+   * string $id - id пользователя
+   * return array
+  */  
   public function getOne($table, $id) {
     $sql = "SELECT * FROM {$table} WHERE id=:id";
     $stat = $this->pdo->prepare($sql);
@@ -31,6 +45,12 @@ class QueryBilder {
     return $stat->fetch(PDO::FETCH_ASSOC);
   }
 
+  /**
+   * string $table - название таблицы
+   * string $id - id пользователя
+   * array $data - массив данных
+   * return array
+  */ 
   public function update($table, $data, $id) {
     dd($data);
     $keys = array_keys($data);
@@ -46,7 +66,12 @@ class QueryBilder {
     $stat->execute($data);
     dd($stat);
   }
-  
+
+  /**
+   * string $table - название таблицы
+   * string $id - id пользователя
+   * return array
+  */ 
   public function delete($table, $id) { 
     $sql = "DELETE FROM {$table} WHERE id=:id";
     $stat = $this->pdo->prepare($sql);
