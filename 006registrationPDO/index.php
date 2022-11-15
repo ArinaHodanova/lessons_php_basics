@@ -28,7 +28,6 @@ session_start();
 
     <?//ООП?>
     <?include 'get_session_mess_oop.php'//Вывод сессиии?>
-    <?$_SESSION['result']->getIsEmptyEmail()?>
     
     <form action="setting_oop.php" method="post" class="form-group">
     <p>ООП форма</p>
