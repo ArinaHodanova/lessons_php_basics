@@ -1,6 +1,5 @@
 <?
 session_start();
-require_once 'class/FormChecker.class.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,8 +12,8 @@ require_once 'class/FormChecker.class.php';
     <main>
 
     <?//Процедурный эталон?>
-    <?include 'get_session_mess.php'//Вывод сессиии?>
-    <form action="sitting.php" method="post" class="form-group">
+    <?//include 'get_session_mess.php'//Вывод сессиии?>
+    <form action="setting.php" method="post" class="form-group" style="display:none">
         <div class="form-input">
             <label class="form-label" for="simpleinput">Email</label>
             <input type="text" name="email" id="simpleinput">
@@ -27,9 +26,12 @@ require_once 'class/FormChecker.class.php';
     </form>
 
 
-    <?//Тест класса инклудера?>
-    <?include 'get_session_mess.php'//Вывод сессиии?>
-    <form action="sitting_oop.php" method="post" class="form-group">
+    <?//ООП?>
+    <?include 'get_session_mess_oop.php'//Вывод сессиии?>
+    <?$_SESSION['result']->getIsEmptyEmail()?>
+    
+    <form action="setting_oop.php" method="post" class="form-group">
+    <p>ООП форма</p>
         <div class="form-input">
             <label class="form-label" for="simpleinput">Email</label>
             <input type="text" name="email" id="simpleinput">
