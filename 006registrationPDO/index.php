@@ -12,7 +12,7 @@ require_once 'class/FormChecker.class.php';
 <body>
     <main>
 
-    <?//Пример?>
+    <?//Процедурный эталон?>
     <?include 'get_session_mess.php'//Вывод сессиии?>
     <form action="sitting.php" method="post" class="form-group">
         <div class="form-input">
@@ -27,7 +27,7 @@ require_once 'class/FormChecker.class.php';
     </form>
 
 
-    <?//С ооп?>
+    <?//Тест класса инклудера?>
     <?include 'get_session_mess.php'//Вывод сессиии?>
     <form action="sitting_oop.php" method="post" class="form-group">
         <div class="form-input">
@@ -40,6 +40,8 @@ require_once 'class/FormChecker.class.php';
         </div>
         <button type="submit" class="btn">Отправить</button>
     </form>
+
+    <?//тест класса регенератора формы?>
 
     </main>
 </body>
