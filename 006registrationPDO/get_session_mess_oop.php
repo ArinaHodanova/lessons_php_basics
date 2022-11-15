@@ -1,1 +1,3 @@
-
+<?
+$_SESSION['result']->getIsEmptyEmail()
+?>
