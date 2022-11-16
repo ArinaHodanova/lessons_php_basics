@@ -1,17 +1,16 @@
 <?
-require_once 'class/FormChecker.class.php';
+include  __DIR__ . '/class/connect.php';
 session_start();
-$email = $_POST['email'];
-$password = $_POST['password'];
 
-$_SESSION['result'] = new FormChecker;
+echo $_POST['email'] . '<br>';
 
-//подключаемся к БД
-$db = new PDO('mysql:host=localhost;dbname=training', 'root', 'root');
-//делаем запрос, который проверяет если ли значения поля в БД совпад за значение поля формы
-$sql_select = "SELECT * FROM `users_reg` WHERE email=:email";
-$statment = $db->prepare($sql_select);
-$statment->execute(['email' => $email]);
-$result = $statment->fetch(PDO::FETCH_ASSOC);
+//в массив передается только один параметр и его значение
+$query->getOneUser('users_reg', ['email' => $_POST['email']]);
 
+dd($query);
+function dd($arr) {
+  echo '<pre>';
+  print_r($arr);
+  echo '</pre>';
+}
 ?>
