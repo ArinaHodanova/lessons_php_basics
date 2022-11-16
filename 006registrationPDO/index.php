@@ -11,38 +11,11 @@ session_start();
 <body>
     <main>
 
-    <?//Процедурный эталон?>
-    <?//include 'get_session_mess.php'//Вывод сессиии?>
-    <form action="setting.php" method="post" class="form-group" style="display:none">
-        <div class="form-input">
-            <label class="form-label" for="simpleinput">Email</label>
-            <input type="text" name="email" id="simpleinput">
-        </div>
-        <div class="form-input">
-            <label class="form-label" for="simpleinput">Password</label>
-            <input type="password" name="password" id="simpleinput">
-        </div>
-        <button type="submit" class="btn">Отправить</button>
-    </form>
+    <?//Данный код выполнен в процедурном стиле?>
+    <?//include 'form_procedur.php'?>
 
-
-    <?//ООП?>
-    <?include 'get_session_mess_oop.php'//Вывод сессиии?>
-    
-    <form action="setting_oop.php" method="post" class="form-group">
-    <p>ООП форма</p>
-        <div class="form-input">
-            <label class="form-label" for="simpleinput">Email</label>
-            <input type="text" name="email" id="simpleinput">
-        </div>
-        <div class="form-input">
-            <label class="form-label" for="simpleinput">Password</label>
-            <input type="password" name="password" id="simpleinput">
-        </div>
-        <button type="submit" class="btn">Отправить</button>
-    </form>
-
-    <?//тест класса регенератора формы?>
+    <?//Данный код выполнен с ООП?>
+    <?include 'form_oop.php'?>
 
     </main>
 </body>
