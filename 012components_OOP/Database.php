@@ -1,5 +1,4 @@
 <?
-//Работа с БД
 class Database {
   private static $make = null;
   private $pdo, $query, $erorr = false, $result, $count;
@@ -23,7 +22,7 @@ class Database {
    * string $table - название таблицы
    * $params - передаваемые параметры
   */
-  public function select($sql, $params = []) {
+  public function request($sql, $params = []) {
     
     $this->erorr = false;
     $this->query = $this->pdo->prepare($sql);
@@ -45,8 +44,26 @@ class Database {
     return $this;
   }
 
+  public function get($table, $where = []) {
+    if(count($where) === 3) {
+      $operators = ['>', '<', '=', '>=', '<=', '!='];//допустимые операторы
+      $fild = trim($where[0], ' ');//название поля
+      $operator = trim($where[1], ' ');//название
+      $value = trim($where[2], ' ');
+      if(in_array($operator, $operators)) {
+        $sql = "SELECT * FROM {$table} WHERE {$fild}{$operator} ?";
+        $this->query = $this->request($sql, [$value]);
+      }
+    } 
+    return $this;
+  }
+
+  public function query() {
+    return $this->query;
+  }
+
   public function error() {
-    return $this->error;
+    return $this->erorr;
   }
 
   public function result() {
@@ -56,5 +73,6 @@ class Database {
   public function count() {
     return $this->count;
   }
+  
 }
 ?>
