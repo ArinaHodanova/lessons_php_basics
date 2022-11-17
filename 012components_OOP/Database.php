@@ -52,7 +52,9 @@ class Database {
       $value = trim($where[2], ' ');
       if(in_array($operator, $operators)) {
         $sql = "SELECT * FROM {$table} WHERE {$fild}{$operator} ?";
-        $this->query = $this->request($sql, [$value]);
+        if(!$this->request($sql, [$value])->error()) {
+          return $this;
+        } 
       }
     } 
     return $this;
