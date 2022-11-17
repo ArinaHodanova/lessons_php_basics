@@ -1,8 +1,8 @@
 <?
 //Работа с БД
 class Database {
-  private static $const = null;
-  private $pdo, $query, $error = false, $lists, $count;
+  private static $make = null;
+  private $pdo, $query, $erorr = false, $result, $count;
 
   private function __construct() {
     try {
@@ -12,26 +12,36 @@ class Database {
     }
   }
 
-  public static function getСonst() {
-    if(!isset(self::$const)) {
-      self::$const = new Database();
+  public static function getMake() {
+    if(!isset(self::$make)) {
+      self::$make = new Database();
     }
-    return self::$const;
+    return self::$make;
   }
 
-  public function query($sql) {
-    //обнуляем ошибки, что бы ошибки предыдушего запроса не записывалась в текущий (в случае, если ошибки есть)
-    $this->error = false;
+  /**
+   * string $table - название таблицы
+   * $params - передаваемые параметры
+  */
+  public function select($sql, $params = []) {
+    
+    $this->erorr = false;
     $this->query = $this->pdo->prepare($sql);
-    if(!$this->query->execute()) {
-      $this->error = true;
-    } else {
-      //записываем в массив записи из таблицы
-      $this->lists = $this->query->fetchAll(PDO::FETCH_OBJ);
 
-      //записываем кол-ва записей
-      $this->count = $this->query->rowCount();
+    if(count($params)) {
+      $i = 1;
+      foreach ($params as $param) {
+        $this->query->bindValue($i, $param);
+        $i++;
+      } 
+    } 
+    
+    if(!$this->query->execute()) {
+      $this->erorr = true;
     }
+    $this->result = $this->query->fetchAll(PDO::FETCH_OBJ);
+    $this->count =  $this->query->rowCount();
+    //что бы обратиться к объекту данного класса нужно вернуть текущий экземпляр
     return $this;
   }
 
