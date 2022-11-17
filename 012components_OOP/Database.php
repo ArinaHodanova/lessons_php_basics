@@ -49,12 +49,10 @@ class Database {
     return $this->error;
   }
 
-  //получаем список записей из БД в массив
-  public function lists() {
-    return $this->lists;
+  public function result() {
+    return $this->result;
   }
 
-  //получаем кол-во записей
   public function count() {
     return $this->count;
   }
