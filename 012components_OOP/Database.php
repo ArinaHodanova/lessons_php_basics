@@ -90,16 +90,31 @@ class Database {
    * $$datas - массив с данными
   */
   public function insert($table, $datas = []) {
+
+    //определяем многомерный или одномерный массив
     $values = '';
     foreach($datas as $data) {
       $values .= "?,";
     }
     $values = rtrim($values, ',');
+
     $sql = "INSERT INTO {$table} (" . '`' . implode('`, `',array_keys($datas)) . '`' . ") VALUES ({$values}) ";
-    if(!$this->request($sql, $datas)->error()) {
+      if(!$this->request($sql, $datas)->error()) {
         return true;
-    }
+      }
     return false;
+  }
+
+  public function update($table , $id, $data) {
+    $set = '';
+    foreach ($data as $key => $value) {
+      $set .= " {$key} = ?,";
+    }
+
+    echo rtrim($set, ',');
+
+    $sql = "UPDATE {$table} SET name = ?, fname = ? WHERE id = :$id" ;
+    dd($sql);
   }
 
   public function query() {
@@ -119,4 +134,5 @@ class Database {
   }
   
 }
+
 ?>
