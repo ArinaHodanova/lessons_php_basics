@@ -44,20 +44,28 @@ class Database {
     return $this;
   }
 
-  public function get($table, $where = []) {
+   public function get($table, $where = []) {
+    return $this->action('SELECT *', $table, $where);
+  }
+
+  public function delete($table, $where = []) { 
+    return $this->action('DELETE', $table, $where);
+  }
+
+  public function action($action, $table, $where = []) {
     if(count($where) === 3) {
       $operators = ['>', '<', '=', '>=', '<=', '!='];//допустимые операторы
       $fild = trim($where[0], ' ');//название поля
-      $operator = trim($where[1], ' ');//название
-      $value = trim($where[2], ' ');
+      $operator = trim($where[1], ' ');//оператор
+      $value = trim($where[2], ' ');//значение
       if(in_array($operator, $operators)) {
-        $sql = "SELECT * FROM {$table} WHERE {$fild}{$operator} ?";
+        $sql = "{$action} FROM {$table} WHERE {$fild} {$operator} ?";
         if(!$this->request($sql, [$value])->error()) {
           return $this;
         } 
-      }
+      } 
     } 
-    return $this;
+    return false;
   }
 
   public function query() {
