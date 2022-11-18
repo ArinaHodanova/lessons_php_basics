@@ -1,7 +1,7 @@
 <?
 class Database {
   private static $make = null;
-  private $pdo, $query, $erorr = false, $result, $count;
+  private $pdo, $query, $error = false, $result, $count;
 
   private function __construct() {
     try {
@@ -24,7 +24,7 @@ class Database {
   */
   public function request($sql, $params = []) {
     
-    $this->erorr = false;
+    $this->error = false;
     $this->query = $this->pdo->prepare($sql);
 
     if(count($params)) {
@@ -36,7 +36,7 @@ class Database {
     } 
     
     if(!$this->query->execute()) {
-      $this->erorr = true;
+      $this->error = true;
     }
     $this->result = $this->query->fetchAll(PDO::FETCH_OBJ);
     $this->count =  $this->query->rowCount();
@@ -44,14 +44,30 @@ class Database {
     return $this;
   }
 
-   public function get($table, $where = []) {
+  /**
+   * Получить данных из табл
+   * $table - название таблицы
+   * $where - массив с данными, который нужно получить
+  */
+  public function get($table, $where = []) {
     return $this->action('SELECT *', $table, $where);
   }
 
+  /**
+   * Удаление данных из табл
+   * $table - название таблицы
+   * $where - массив с данными, который нужно удалить 
+  */
   public function delete($table, $where = []) { 
     return $this->action('DELETE', $table, $where);
   }
 
+  /**
+   * Работа с даннми из табл
+   * $action - действие ,которое нужно сделать DELETE, SELECT
+   * $table - название таблицы
+   * $where - массив с данными над, которыми производится действие
+  */
   public function action($action, $table, $where = []) {
     if(count($where) === 3) {
       $operators = ['>', '<', '=', '>=', '<=', '!='];//допустимые операторы
@@ -68,12 +84,30 @@ class Database {
     return false;
   }
 
+  /**
+   * Добавить данные в таблицу
+   * $table - название таблицы
+   * $$datas - массив с данными
+  */
+  public function insert($table, $datas = []) {
+    $values = '';
+    foreach($datas as $data) {
+      $values .= "?,";
+    }
+    $values = rtrim($values, ',');
+    $sql = "INSERT INTO {$table} (" . '`' . implode('`, `',array_keys($datas)) . '`' . ") VALUES ({$values}) ";
+    if(!$this->request($sql, $datas)->error()) {
+        return true;
+    }
+    return false;
+  }
+
   public function query() {
     return $this->query;
   }
 
   public function error() {
-    return $this->erorr;
+    return $this->error;
   }
 
   public function result() {
