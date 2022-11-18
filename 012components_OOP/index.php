@@ -35,10 +35,21 @@ require_once 'Database.php';
  * Второй парамерт - многомерный массив если нуно ставить насколько значений и одномерный массив, если нужно вставить одно значение
 */
 /*$users_set = Database::getMake()->insert('people' , [
-      'name' => 'Иван',
-      'fname' => 'Редьков',
-    ]
+    'name' => 'Оля',
+    'fname' => 'Тест 1'
+  ]
 );*/
+
+
+/**
+ * Запрос update где не используется sql запрос, а используется обертка
+ * Первый параметр - название таблицы
+ * Второй парамерт - id пользователя
+*/
+$users_set = Database::getMake()->update('people' , 41, [
+  'name' => 'Ольга',
+  'fname' => 'Юманова'
+]);
 
 $users = Database::getMake()->request('SELECT * FROM people');
 dd($users->result());
