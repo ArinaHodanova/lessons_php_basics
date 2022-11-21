@@ -33,6 +33,26 @@ $users = Database::getMake()->request('SELECT * FROM people');
  * Первый параметр - название таблицы
  * Второй парамерт - многомерный массив если нуно ставить насколько значений и одномерный массив, если нужно вставить одно значение
 */
+<form action="" method="post">
+    <div class="field">
+        <label for="useremail">Username<label>
+        <input type="text" name="useremail" value="<?=Input::get('useremail')?>"></input>
+    </div>
+
+    <div class="field">
+        <label for="pass">Password<label>
+        <input type="text" name="password"></input>
+    </div>
+
+    <div class="field">
+        <label for="pass">Password Again<label>
+        <input type="text" name="password_again"></input>
+    </div>
+
+    <div class="field">
+        <button type="submit">Submit</buttin>
+    </div>
+</form>
 /*$users_set = Database::getMake()->insert('people' , [
     'name' => 'Оля',
     'fname' => 'Тест 1'
