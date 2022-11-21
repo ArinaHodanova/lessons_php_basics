@@ -104,17 +104,25 @@ class Database {
       }
     return false;
   }
-
-  public function update($table , $id, $data) {
+  
+   /**
+   * Изменение данных в таблице
+   * $table - название таблицы
+   * $id - id пользователя
+   * $datas - массив с данными
+  */
+  public function update($table , $id, $datas) {
     $set = '';
-    foreach ($data as $key => $value) {
-      $set .= " {$key} = ?,";
+    foreach ($datas as $key => $value) {
+      $set .= "{$key} = ?,";
     }
+    $set = rtrim($set, ',');
 
-    echo rtrim($set, ',');
-
-    $sql = "UPDATE {$table} SET name = ?, fname = ? WHERE id = :$id" ;
-    dd($sql);
+    $sql = "UPDATE {$table} SET {$set} WHERE id = {$id}" ;
+    if(!$this->request($sql, $datas)->error()) {
+      return true;
+    }
+    return false;
   }
 
   public function query() {
