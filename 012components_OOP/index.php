@@ -1,11 +1,10 @@
 <?
 session_start();
-$config = require_once 'config.php';
-include 'function.php';
-require_once 'Database.php';
+require_once 'function.php';
+require_once 'conf.php';
 
 //Вывести список
-//$users = Database::getMake()->request('SELECT * FROM people');
+$users = Database::getMake()->request('SELECT * FROM people');
 
 //Выполняем запрос с передачей и получанием одного параметра 
 //$users = Database::getMake()->request('SELECT * FROM people WHERE fname = ?', ['Иванова']);
@@ -18,8 +17,9 @@ require_once 'Database.php';
  * Первый параметр - название таблицы
  * Второй парамерт - поле , оператор, значение
 */
-//$users = Database::getMake()->get('people' , ['id', '>' , '0'])->result();
-//dd($users);
+//$users = Database::getMake()->get('people' , ['id', '>' , '0']);
+//метод, позволяющий вывести одного пользователя
+//$users->first();
 
 /**
  * Запрос delete где не используется sql запрос, а используется обертка
@@ -27,7 +27,6 @@ require_once 'Database.php';
  * Второй парамерт - поле , оператор, значение
 */
 //Database::getMake()->delete('people' , ['id', '=' , '16']);
-
 
 /**
  * Запрос insert где не используется sql запрос, а используется обертка
@@ -40,17 +39,15 @@ require_once 'Database.php';
   ]
 );*/
 
-
 /**
  * Запрос update где не используется sql запрос, а используется обертка
  * Первый параметр - название таблицы
  * Второй парамерт - id пользователя
 */
-$users_set = Database::getMake()->update('people' , 41, [
-  'name' => 'Ольга',
-  'fname' => 'Юманова'
-]);
-
-$users = Database::getMake()->request('SELECT * FROM people');
+/*$users_update = Database::getMake()->update('people' , 15, [
+    'name' => 'Mira',
+    'fname' => 'Erokhin'
+  ]
+);*/
 dd($users->result());
 ?>
