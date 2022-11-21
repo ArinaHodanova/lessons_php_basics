@@ -5,7 +5,7 @@ class Database {
 
   private function __construct() {
     try {
-        $this->pdo = new PDO('mysql:host=localhost;dbname=users_db', 'root', 'root');
+        $this->pdo = new PDO('mysql:host='.Config::get("mysql.host").';dbname='.Config::get("mysql.db").'', Config::get('mysql.username') , Config::get('mysql.password'));
     } catch (PDOException $exception) {
         die($exception->getMessage());
     }
@@ -123,6 +123,10 @@ class Database {
       return true;
     }
     return false;
+  }
+  
+  public function first() {
+    return $this->result()[0];
   }
 
   public function query() {
