@@ -71,3 +71,63 @@ $users = Database::getMake()->request('SELECT * FROM people');
 );*/
 dd($users->result());
 ?>
+
+<?
+if(Input::exists()) {
+  $validate = new Validate();
+
+  $validation = $validate->check($_POST, [
+      'email' => [
+        'required' => true,
+        'min' => 2,
+        'max' => 30,
+        'validate_email' => true,
+        'unique' => 'users_reg',//уникальный емайл в таблице
+      ],
+      'password' => [
+        'required' => true,
+        'min' => 3
+      ],
+      'password_again' => [
+        'required' => true,
+        'matches' => 'password'
+      ]
+  ]);
+
+  if($validate->passed()) {
+    'Passed';
+  } else {
+    foreach($validate->errors() as $error) {
+      $error . '<br>';
+    }
+  }
+ 
+}
+?>
+
+<?if(!empty($validate->errors())):?>
+  <?foreach($validate->errors() as $error):?>
+      <h3><b><?=$error?></b></h3>
+  <?endforeach?>
+<?endif?>
+
+<form action="" method="post">
+    <div class="field">
+        <label for="email">Your email<label>
+        <input type="text" name="email" value="<?=Input::get('email')?>"></input>
+    </div>
+
+    <div class="field">
+        <label for="pass">Your password<label>
+        <input type="text" name="password"></input>
+    </div>
+
+    <div class="field">
+        <label for="pass_again">Password Again<label>
+        <input type="text" name="password_again"></input>
+    </div>
+
+    <div class="field">
+        <button type="submit">Submit</buttin>
+    </div>
+</form>
