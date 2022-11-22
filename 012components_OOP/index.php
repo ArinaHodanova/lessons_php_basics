@@ -4,7 +4,7 @@ require_once 'function.php';
 require_once 'conf.php';
 
 //Вывести список
-$users = Database::getMake()->request('SELECT * FROM people');
+$users = Database::getMake()->request('SELECT * FROM users_reg');
 
 //Выполняем запрос с передачей и получанием одного параметра 
 //$users = Database::getMake()->request('SELECT * FROM people WHERE fname = ?', ['Иванова']);
@@ -33,26 +33,6 @@ $users = Database::getMake()->request('SELECT * FROM people');
  * Первый параметр - название таблицы
  * Второй парамерт - многомерный массив если нуно ставить насколько значений и одномерный массив, если нужно вставить одно значение
 */
-<form action="" method="post">
-    <div class="field">
-        <label for="useremail">Username<label>
-        <input type="text" name="useremail" value="<?=Input::get('useremail')?>"></input>
-    </div>
-
-    <div class="field">
-        <label for="pass">Password<label>
-        <input type="text" name="password"></input>
-    </div>
-
-    <div class="field">
-        <label for="pass">Password Again<label>
-        <input type="text" name="password_again"></input>
-    </div>
-
-    <div class="field">
-        <button type="submit">Submit</buttin>
-    </div>
-</form>
 /*$users_set = Database::getMake()->insert('people' , [
     'name' => 'Оля',
     'fname' => 'Тест 1'
@@ -69,14 +49,18 @@ $users = Database::getMake()->request('SELECT * FROM people');
     'fname' => 'Erokhin'
   ]
 );*/
-dd($users->result());
+//dd($users->result());
 ?>
 
 <?
-if(Input::exists()) {
-  $validate = new Validate();
 
-  $validation = $validate->check($_POST, [
+//обработчик формы
+if(Input::exists()) {
+  //значение токина совпадает со значение пользователя 
+  if(Token::check(Input::get('token'))) {
+    $validate = new Validate();
+    echo Input::get('token');
+    $validation = $validate->check($_POST, [
       'email' => [
         'required' => true,
         'min' => 2,
@@ -92,24 +76,19 @@ if(Input::exists()) {
         'required' => true,
         'matches' => 'password'
       ]
-  ]);
+    ]);
 
-  if($validate->passed()) {
-    'Passed';
-  } else {
-    foreach($validate->errors() as $error) {
-      $error . '<br>';
+    if($validate->passed()) {
+      'Passed';
+    } else {
+      foreach($validate->errors() as $error) {
+        $error . '<br>';
+      }
     }
+
   }
- 
 }
 ?>
-
-<?if(!empty($validate->errors())):?>
-  <?foreach($validate->errors() as $error):?>
-      <h3><b><?=$error?></b></h3>
-  <?endforeach?>
-<?endif?>
 
 <form action="" method="post">
     <div class="field">
@@ -119,13 +98,15 @@ if(Input::exists()) {
 
     <div class="field">
         <label for="pass">Your password<label>
-        <input type="text" name="password"></input>
+        <input type="password" name="password" value="<?=Input::get('password')?>"></input>
     </div>
 
     <div class="field">
         <label for="pass_again">Password Again<label>
         <input type="text" name="password_again"></input>
     </div>
+
+    <input type="hidden" name="token" value="<?=Token::generate();?>">
 
     <div class="field">
         <button type="submit">Submit</buttin>
