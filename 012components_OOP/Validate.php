@@ -8,19 +8,56 @@ class Validate {
   }
 
   public function check($source, $datas) {
- 
     foreach($datas as $data => $rules) {
+      
       foreach($rules as $rule => $rule_value) {
         $value = $source[$data];//получаем значение формы
-        
-        //если поля обязательно проверяем на пустоту 
+
+        //проверяем поля на пустоту
         if($rule == 'required' && empty($value)) {
           $this->addError("{$data} is required");
+        } else if(!empty($value)) { //валидация полей 
+            switch($rule) {
+                //мин. кол-во симолов
+                case 'min':
+                  if(strlen($value) < $rule_value) {
+                    $this->addError("{$data} must be a min of {$rule_value} characters");
+                  }
+                break;
+
+                //макс. кол-во симолов
+                case 'max':
+                  if(strlen($value) > $rule_value) {
+                    $this->addError("{$data} must be a max of {$rule_value} characters");
+                  }
+                break;
+
+                //валидация почты
+                case 'validate_email':
+                  if(!filter_var($value, FILTER_VALIDATE_EMAIL)) {
+                    $this->addError("enter a corrective email address");
+                  } 
+                break;
+
+                //совпадение паролей
+                case 'matches':
+                  if($source[$rule_value] != $value) {
+                    $this->addError("{$rule_value} must match {$data}");
+                  }
+                break;
+
+                //проверка уникальности почты
+                case 'unique': {
+                  $check = $this->db->get($rule_value , [$data, '=' , $value]);
+                  if($check->count()) {
+                    $this->addError("{$data} already exists");
+                  }
+                }
+                break;
+            }
         }
       } 
-     
     }
-
   }
 
   //запись ошибок
@@ -32,7 +69,7 @@ class Validate {
     return $this->errors;
   }
 
-  //прошла и валидация
+  //прошла ли валидация
   public function passed() {
     return $this->passed;
   }
