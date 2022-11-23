@@ -59,7 +59,7 @@ class Database {
    * $where - массив с данными, который нужно удалить 
   */
   public function delete($table, $where = []) { 
-    return $this->action('DELETE', $table, $where);
+    return $this->action('DELETE', $table, $where);ф
   }
 
   /**
