@@ -21,6 +21,4 @@ class Input {
     return '';
   }
 }
-
-
 ?>
