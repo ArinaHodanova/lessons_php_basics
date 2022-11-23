@@ -12,6 +12,5 @@ class Config {
       return $config;
     }
   }
-
 }
 ?>
