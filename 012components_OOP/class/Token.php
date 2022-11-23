@@ -5,7 +5,7 @@ class Token {
     return Session::put(Config::get('session.token_name'), md5(uniqid())); 
   }
 
-  //проверяет сопрадение токина
+  //проверяет соврадение токина
   public static function check($token) {
     $tokenName = Config::get('session.token_name');
 
