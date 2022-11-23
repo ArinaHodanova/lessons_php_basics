@@ -7,6 +7,7 @@ require_once __DIR__ . '/class/Input.php';
 require_once __DIR__ . '/class/Token.php';
 require_once __DIR__ . '/class/Session.php';
 require_once __DIR__ . '/class/User.php';
+require_once __DIR__ . '/class/Redirect.php';
 
 $GLOBALS['config'] = [
   'mysql' => [
