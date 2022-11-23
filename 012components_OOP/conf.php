@@ -1,24 +1,28 @@
 <?
-require_once 'Config.php';
-require_once 'Database.php';
+session_start();
+require_once __DIR__ . '/class/Config.php';
+require_once __DIR__ . '/class/Database.php';
+require_once __DIR__ . '/class/Validate.php';
+require_once __DIR__ . '/class/Input.php';
+require_once __DIR__ . '/class/Token.php';
+require_once __DIR__ . '/class/Session.php';
 
 $GLOBALS['config'] = [
   'mysql' => [
     'host' => 'localhost',
     'username' => 'root',
     'password' => 'root',
-    'db' => 'users_db',
+    'db' => 'training',
     'something' => [
       'no' => [
         'no' => 'goot'
       ]
     ]
   ],
-  
+
   'session' => [
     'token_name' => 'token'
-  ],
-  
+  ]
 ];
 
 ?>
