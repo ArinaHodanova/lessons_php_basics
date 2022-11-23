@@ -52,45 +52,7 @@ $users = Database::getMake()->request('SELECT * FROM users_reg');
 //dd($users->result());
 ?>
 
-<?
-
-//обработчик формы
-if(Input::exists()) {
-  //значение токина совпадает со значение пользователя 
-  if(Token::check(Input::get('token'))) {
-    $validate = new Validate();
-    echo Input::get('token');
-    $validation = $validate->check($_POST, [
-      'email' => [
-        'required' => true,
-        'min' => 2,
-        'max' => 30,
-        'validate_email' => true,
-        'unique' => 'users_reg',//уникальный емайл в таблице
-      ],
-      'password' => [
-        'required' => true,
-        'min' => 3
-      ],
-      'password_again' => [
-        'required' => true,
-        'matches' => 'password'
-      ]
-    ]);
-
-    if($validate->passed()) {
-      'Passed';
-    } else {
-      foreach($validate->errors() as $error) {
-        $error . '<br>';
-      }
-    }
-
-  }
-}
-?>
-
-<form action="" method="post">
+<form action="setting.php" method="post">
     <div class="field">
         <label for="email">Your email<label>
         <input type="text" name="email" value="<?=Input::get('email')?>"></input>
