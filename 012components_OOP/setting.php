@@ -28,6 +28,10 @@ if(Input::exists()) {
     ]);
 
     if($validate->passed()) {
+        $user->create([
+          'email' => Input::get('email'),
+          'password' => password_hash(Input::get('password'), PASSWORD_DEFAULT),//хешируем пароль
+        ]);
         Session::flash('success', 'register success');
         header('Location: admin_panel.php');
     } else {
