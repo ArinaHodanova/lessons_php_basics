@@ -74,7 +74,7 @@ class Validate {
     return $this->errors;
   }
 
-  //прошла и валидация
+  //успешное прохождении валидации
   public function passed() {
     return $this->passed;
   }
