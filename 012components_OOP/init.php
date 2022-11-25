@@ -23,7 +23,8 @@ $GLOBALS['config'] = [
   ],
 
   'session' => [
-    'token_name' => 'token'
+    'token_name' => 'token',
+    'user_session' => 'user'
   ]
 ];
 
