@@ -49,4 +49,19 @@ $users = Database::getMake()->request('SELECT * FROM users_reg');
     'fname' => 'Erokhin'
   ]
 );*/
+
+$user = new User;//получаем текущег пользователя 
+dd($user->data());
+
+if($user->isLoggedIn()) {
+   echo 'logged in';
+}
+
+$anotherUser = new User('200');//получаем пользователя по id 
+dd($anotherUser->data()); 
+if($anotherUser->isLoggedIn()) {
+  echo 'logged in';
+} else {
+  echo 'not logged in';
+}
 ?>
