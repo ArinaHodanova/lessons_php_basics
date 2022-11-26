@@ -1,7 +1,7 @@
 <?
 session_start();
 require_once 'function.php';
-require_once 'conf.php';
+require_once 'init.php';
 
 //Вывести список
 $users = Database::getMake()->request('SELECT * FROM users_reg');
@@ -49,28 +49,19 @@ $users = Database::getMake()->request('SELECT * FROM users_reg');
     'fname' => 'Erokhin'
   ]
 );*/
-//dd($users->result());
+
+$user = new User;//получаем текущег пользователя 
+dd($user->data());
+
+if($user->isLoggedIn()) {
+   echo 'logged in';
+}
+
+$anotherUser = new User('200');//получаем пользователя по id 
+dd($anotherUser->data()); 
+if($anotherUser->isLoggedIn()) {
+  echo 'logged in';
+} else {
+  echo 'not logged in';
+}
 ?>
-
-<form action="setting.php" method="post">
-    <div class="field">
-        <label for="email">Your email<label>
-        <input type="text" name="email" value="<?=Input::get('email')?>"></input>
-    </div>
-
-    <div class="field">
-        <label for="pass">Your password<label>
-        <input type="password" name="password" value="<?=Input::get('password')?>"></input>
-    </div>
-
-    <div class="field">
-        <label for="pass_again">Password Again<label>
-        <input type="text" name="password_again"></input>
-    </div>
-
-    <input type="hidden" name="token" value="<?=Token::generate();?>">
-
-    <div class="field">
-        <button type="submit">Submit</buttin>
-    </div>
-</form>
