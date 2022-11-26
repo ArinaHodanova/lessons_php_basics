@@ -1,12 +1,14 @@
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
-ctx.fillStyle = "#F00000";
+ctx.fillStyle = "#F00A00";
 ctx.textAlign = "center";
-ctx.fillText("Hello World", 150, 100);
 const xmlhttp = new XMLHttpRequest();
-xmlhttp.onload = function() {
-	  const graph = JSON.parse(this.responseText);
+function putVertex(graph,index,array) {
 	ctx.fillText(graph.name1, graph.xpos, graph.ypos);
+}
+xmlhttp.onload = function() {
+	  const graph_arr = JSON.parse(this.responseText);
+	  graph_arr.forEach(putVertex);
 }
 xmlhttp.open("GET", "graph.json.php");
 xmlhttp.send();
