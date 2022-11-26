@@ -12,3 +12,20 @@ xmlhttp.onload = function() {
 }
 xmlhttp.open("GET", "graph.json.php");
 xmlhttp.send();
+let socket = new WebSocket("ws://localhost:8001/");
+
+socket.onopen = function(e) {
+	  alert("[open] Соединение установлено");
+	  socket.send("cli");
+};
+
+socket.onmessage = function(event) {
+	  alert(`[message] Данные получены с сервера: ${event.data}`);
+	  const graph = JSON.parse(event.data);
+	ctx.fillText(graph.name1, graph.xpos, graph.ypos);
+
+};
+socket.onerror = function(error) {
+	str = JSON.stringify(error);
+	  alert(`[error] ${str}`);
+};
