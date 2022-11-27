@@ -43,42 +43,24 @@ ENDL;
 				echo $headers;
 				socket_write($s, $headers, strlen($headers));
 				$this->clients[]=$s;
-			}
-			/*
-			if ( preg_match(Websocket::client_header,$request))
-			{
-				$sec_key = [];
-				$key_acc = "err";
-				echo Websocket::sec_key_pattern."sec key\n";
-				if ( preg_match(Websocket::sec_key_pattern,$request,$sec_key) )
-					$key_acc = base64_encode(sha1($sec_key[1]."258EAFA5-E914-47DA-95CA-C5AB0DC85B11",true));
-				//preg_match('/(ss)$/',"ass",$sec_key);
-				//print_r($sec_key);
-				//print_r($key_acc);
-				$headers = "HTTP/1.1 101 Switching Protocols\r\n";
-				$headers .= "Upgrade: websocket\r\n";
-				$headers .= "Connection: Upgrade\r\n";
-				$headers .= "Sec-WebSocket-Version: 13\r\n";
-				$headers .= "Sec-WebSocket-Accept: $key_acc\r\n\r\n";
-				//$a = sprintf(Websocket::chrome_responce,$key_acc);
-				echo "chrome_responce: \n".$headers."\n";
-				socket_write($s,$headers);
-			}
-			elseif ("stop" == trim($request))
-			{
+			} elseif ("stop" == trim($request)) {
 				socket_close($this->server);
+				foreach($this->clients as $soc)
+				{
+					socket_close($soc);
+				}
 				break;
 			}
 			else
 			{
+				
+				$response = chr(129).chr(strlen($request)).$request;
 				foreach($this->clients as $soc)
 				{
-					socket_write($soc,$request);
+					socket_write($soc,$response);
 				}
 				socket_close($s) ;
 			}
-			echo $request;
-			 */
 		}
 	}
 	public function send_vertex($vertex)
