@@ -1,6 +1,5 @@
 <?
 echo "testing send ";
-echo $argv;
 require_once ("ws.class.php");
 require_once "../canvas/graph.class.php";
 $a = new Websocket();

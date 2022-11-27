@@ -26,6 +26,9 @@ socket.onmessage = function(event) {
 
 };
 socket.onerror = function(error) {
-	str = JSON.stringify(error);
+	str = JSON.stringify(error, ["message", "arguments", "type", "name"]);
 	  alert(`[error] ${str}`);
 };
+socket.onerror = function (message, url, line, column, error) {
+	    console.log(message, url, line, column, error);
+}
