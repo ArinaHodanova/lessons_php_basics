@@ -1,18 +1,15 @@
 <?
-$form_chek = new Validator();
-$form_chek->check (
-    [
-        'password' => $_POST['password'],
-        'email' => $_POST['email'],
-    ]
-);
+include  __DIR__ . '/class/connect.php';
+session_start();
+
+foreach($_SESSION['form_check'] as $value) {
+   $value;
+}
 ?>
+
 <form action="setting_oop.php" method="post" class="form-group">
     <p>Подход: ООП</p>
-        <p>Подход: ООП</p>
-         <?if(!empty($form_chek->error())):?>
-            <p><?=$form_chek->error()?></p>
-         <?endif?>
+        <p></p>
         <div class="form-input">
             <label class="form-label" for="simpleinput">Email</label>
             <input type="text" name="email" id="simpleinput">
