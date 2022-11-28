@@ -1,27 +1,18 @@
 <?
 class Validator {
-    private $getIsEmptyEmail, $error = null, $result = null;
+    private $error = false, $result = null;
 
+    //ошибка у поля email
+    public function check() {
 
-    public function check($dates = []) {
-      $this->error = false;
-      foreach($dates as $date => $value) {
-        if(empty($value)) {
-          $this->error = "Поле - {$date} не может быть пустым";
-        } 
+      if(empty($_POST['email'])) {
+        echo 'Да';
+        $this->error = true;
       }
-
-      return $this;
     }
 
-    public function error() {
-       return $this->error;
+    public function getEmptyEmai() {
+      return $this->error;
     }
-
-    public function result() {
-      return $this->result;
-   }
-
 }
 ?>
-
