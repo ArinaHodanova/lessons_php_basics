@@ -40,12 +40,17 @@ if(Input::exists()) {
 <form action="" method="post">
     <div class="field">
         <label for="email">Your email<label>
-        <input type="text" name="email" value="<?=Input::get('email')?>"></input>
+        <input type="text" name="email" value="<?=Input::get('email')?>">
     </div>
 
     <div class="field">
         <label for="pass">Your password<label>
-        <input type="password" name="password"></input>
+        <input type="password" name="password">
+    </div>
+
+    <div class="field">
+        <input type="checkbox" name="remember" id="remember">
+        <label for="remember">Remember me<label>      
     </div>
 
     <input type="hidden" name="token" value="<?=Token::generate();?>">
