@@ -1,12 +1,13 @@
 <?
-include  __DIR__ . '/class/connect.php';
-session_start();
+echo '<pre>';
+print_r($_SESSION);
+echo '</pre>';
 
-foreach($_SESSION['form_check'] as $value) {
-   $value;
-}
+echo '<pre>';
+print_r($_POST);
+echo '</pre>';
+
 ?>
-
 <form action="setting_oop.php" method="post" class="form-group">
     <p>Подход: ООП</p>
         <p></p>

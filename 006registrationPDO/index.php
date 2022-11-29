@@ -1,4 +1,6 @@
 <?
+error_reporting(-1);
+include  __DIR__ . '/class/connect.php';
 session_start();
 ?>
 <!DOCTYPE html>
