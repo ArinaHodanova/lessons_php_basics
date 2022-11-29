@@ -50,18 +50,13 @@ $users = Database::getMake()->request('SELECT * FROM users_reg');
   ]
 );*/
 
-$user = new User;//получаем текущег пользователя 
-dd($user->data());
+$user = new User;
+?>
 
-if($user->isLoggedIn()) {
-   echo 'logged in';
-}
-
-$anotherUser = new User('200');//получаем пользователя по id 
-dd($anotherUser->data()); 
-if($anotherUser->isLoggedIn()) {
-  echo 'logged in';
-} else {
-  echo 'not logged in';
-}
+<?if($user->isLoggedIn()):?>
+    <h2>Hello <?=$user->data()->username?></h2>
+    <a href="logout.php">logout</a>
+<?else:?>
+    <a href="login.php">login</a>
+<?endif?>
 ?>
