@@ -2,7 +2,7 @@
 error_reporting(-1);
 include  __DIR__ . '/class/connect.php';
 session_start();
-$_SESSION['form_check'] = new Validator();
+$_SESSION['validator'] = new Validator();
 ?>
 <!DOCTYPE html>
 <html lang="en">
