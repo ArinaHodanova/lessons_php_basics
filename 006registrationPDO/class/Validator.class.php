@@ -1,6 +1,8 @@
 <?
 class Validator {
-    private $error = false, $result = null;
+    private $name;
+    private $mess;
+    protected $is_empty_email = false;
 
     //ошибка у поля email
     public function check() {
@@ -8,11 +10,14 @@ class Validator {
       if(empty($_POST['email'])) {
         echo 'Да';
         $this->error = true;
+      } else {
+        echo 'Нет';
       }
+
     }
 
-    public function getEmptyEmai() {
-      return $this->error;
-    }
+    public function getIsEmptyEmail() {
+        return $this->is_empty_email;
+    } 
 }
 ?>
