@@ -1,14 +1,13 @@
 <?
 echo '<pre>';
-var_dump($_SESSION['form_check']);
+var_dump($_SESSION);
 echo '</pre>';
-
-echo $_SESSION['form_check']->check();
+$val = $_SESSION['validator'];
 ?>
 
 <form action="setting_oop.php" method="post" class="form-group">
     <p>Подход: ООП</p>
-        <?if(0):?>
+        <?if($val->getIsEmptyEmail()):?>
             <p>Ошибка</p>
         <?endif?>
         <div class="form-input">
