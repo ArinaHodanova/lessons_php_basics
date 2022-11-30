@@ -1,16 +1,16 @@
 <?
 echo '<pre>';
-print_r($_SESSION);
+var_dump($_SESSION['form_check']);
 echo '</pre>';
 
-echo '<pre>';
-print_r($_POST);
-echo '</pre>';
-
+echo $_SESSION['form_check']->check();
 ?>
+
 <form action="setting_oop.php" method="post" class="form-group">
     <p>Подход: ООП</p>
-        <p></p>
+        <?if(0):?>
+            <p>Ошибка</p>
+        <?endif?>
         <div class="form-input">
             <label class="form-label" for="simpleinput">Email</label>
             <input type="text" name="email" id="simpleinput">
