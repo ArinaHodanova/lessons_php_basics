@@ -1,9 +1,9 @@
 <?
-echo "testing send ";
-require_once ("ws.class.php");
-require_once "../canvas/graph.class.php";
+echo "adding vertex to canvas ".PHP_EOL;
+require_once __DIR__ . "/ws.class.php";
+require_once dirname(__DIR__,1) . "/canvas/vertex.class.php";
 $a = new Websocket();
-$v = new graph("vertex",30,35);
-if (4 == count($argv)) $v = new graph($argv[1],$argv[2],$argv[3]);
+$v = new vertex("vertex",30,35);
+if (4 == count($argv)) $v = new vertex($argv[1],$argv[2],$argv[3]);
 $a->send_vertex($v);
 ?>

@@ -1,5 +1,5 @@
 <?
-class graph
+class vertex
 {
 	public $xpos,$ypos,$name1;
 	public function __construct($name,$xpos,$ypos)

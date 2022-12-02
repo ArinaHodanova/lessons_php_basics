@@ -11,9 +11,8 @@ session_start();
 <body>
     <main>
 <canvas id="myCanvas" width="800" height="600" style="border:1px solid #000000;"></canvas>
-	<script type="text/javascript" src="s_canvas.js"></script>
-
-
+	<script type="text/javascript" src="reload_canvas.js"></script>
+	<script type="text/javascript" src="ws_update.js"></script>
 
 </main>
 </body>
