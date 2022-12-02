@@ -1,9 +1,7 @@
 <?
-session_start();
 include  __DIR__ . '/class/connect.php';
-$form_check = new Validator();
-
-$_SESSION['form_check'] = $form_check;
-
+session_start();
+$_SESSION['validator'] = new Validator();
+$_SESSION['validator']->check();
 header('Location: index.php');
 ?>

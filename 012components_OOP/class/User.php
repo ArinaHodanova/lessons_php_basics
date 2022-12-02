@@ -25,15 +25,34 @@ class User {
     $this->db->insert('users_reg', $fields);
   }
 
-  public function login($email = null, $password = null) {
-    if($email) {
-
+  public function login($email = null, $password = null, $remember = false) {
+    if(!$email && !$password && $this->exists()) { 
+      Session::put($this->session_name, $this->data()->id);
+    } else {
       $user = $this->find($email);
-
       if($user) {
+        //сравнение пароль пользователя и паролей в таблице 
         if(password_verify($password, $this->data()->password)) {
           Session::put($this->session_name, $this->data()->id);
+          
+          //работа с кнопкой запомнить меня
+          if($remember) {
+            $hash = hash('sha256', uniqid());//создаем хеш пользователя
+            $hashCheck = $this->db->get('user_session', ['userid', '=', $this->data()->id]);//добавляем хеш в Бд для 1 пользователя
+
+            if(!$hashCheck->count()) {
+              $this->db->insert( 'user_session', [
+                'userid' => $this->data()->id, 
+                'hash' => $hash
+              ]);
+            } else {
+                $hash = $hashCheck->first()->hash;
+            }
+            Cookie::put(Config::get('cookie.cookie_name'), $hash, Config::get('cookie.cookie_expiry'));
+          }
+
           return true;
+
         }
       }
     }

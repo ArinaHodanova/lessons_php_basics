@@ -1,18 +1,29 @@
 <?
 class Validator {
-    private $error = false, $result = null;
+    private $name;
+    private $mess;
+    protected $is_empty_email = false;
+    protected $is_empty_password =  false;
 
     //ошибка у поля email
     public function check() {
 
       if(empty($_POST['email'])) {
-        echo 'Да';
-        $this->error = true;
+        $this->is_empty_email = true;
       }
+
+      if(empty($_POST['password'])) {
+        $this->is_empty_password = true;
+      }
+
     }
 
-    public function getEmptyEmai() {
-      return $this->error;
-    }
+    public function getIsEmptyEmail() {
+        return $this->is_empty_email;
+    } 
+
+    public function getIsEmptyPassword() {
+      return $this->is_empty_password;
+    } 
 }
 ?>

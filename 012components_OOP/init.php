@@ -26,6 +26,21 @@ $GLOBALS['config'] = [
     'token_name' => 'token',
     'user_session' => 'user'
   ]
+  
+  'cookie' => [
+    'cookie_name' => 'hash',
+    'cookie_expiry' => 604800//cрок хранения куки
+  ],
 ];
 
+if(Cookie::exists(Config::get('cookie.cookie_name')) && !Session::exists(Config::get('session.user_session'))) {
+  $hash = Cookie::get(Config::get('cookie.cookie_name'));
+  $hashCheck = Database::getMake()->get('user_session', ['hash', '=', $hash]);
+
+  if($hashCheck->count()) {
+    $user = new User($hashCheck->first()->userid);
+    $user->login();
+  }
+}
+?>
 ?>
