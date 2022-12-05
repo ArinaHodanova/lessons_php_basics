@@ -83,7 +83,9 @@ class User {
   }
   
   public function logout() {
-    return Session::delete($this->session_name);
+    Cookie::delete(Config::get('cookie.cookie_name'));
+    Session::delete($this->session_name);
+    return true;
   }
 }
 ?>
