@@ -55,7 +55,8 @@ $user = new User;
 
 <?if($user->isLoggedIn()):?>
     <h2>Hello <?=$user->data()->username?></h2>
-    <a href="logout.php">logout</a>
+    <p><a href="logout.php">logout</a></p>
+    <p><a href="update_profile.php">Update profile</a></p>
 <?else:?>
     <a href="login.php">login</a>
 <?endif?>
