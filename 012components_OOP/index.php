@@ -57,6 +57,7 @@ $user = new User;
     <h2>Hello <?=$user->data()->username?></h2>
     <p><a href="logout.php">logout</a></p>
     <p><a href="update_profile.php">Update profile</a></p>
+    <p><a href="changepassword.php">Change password</a></p>
 <?else:?>
     <a href="login.php">login</a>
 <?endif?>
