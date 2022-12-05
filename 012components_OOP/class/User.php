@@ -83,9 +83,23 @@ class User {
   }
   
   public function logout() {
+    $this->db->delete('user_session', ['userid', '=', $this->data()->id]);
     Cookie::delete(Config::get('cookie.cookie_name'));
     Session::delete($this->session_name);
-    return true;
+  }
+
+  public function exists() {
+    return (!empty($this->data())) ? true : false;
+  }
+
+  public function update($fields = [], $id = null) {
+    //меняем инормацию по id у текущего пользователя
+    if(!$id && $this->isLoggedIn()) {
+      $id = $this->data()->id;
+    }
+
+    //меняем ин-ию у пользователя по id. Например админ может заменить ин-и у пользователя по id
+    $this->db->update('users_reg', $id, $fields);
   }
 }
 ?>
