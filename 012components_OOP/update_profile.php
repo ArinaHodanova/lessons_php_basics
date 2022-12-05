@@ -23,6 +23,7 @@ if(Input::exists()) {
   if(Token::check(Input::get('token'))) { 
     if($validate->passed()) {
       $user->update(['username' => Input::get('username')]);
+      Redirect::to("update_profile.php");
     } else {
         foreach($validate->errors() as $error) {
           echo $error . '<br>';
