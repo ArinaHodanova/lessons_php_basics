@@ -38,7 +38,7 @@ if(Input::exists()) {
           'password' => password_hash(Input::get('password'), PASSWORD_DEFAULT),//хешируем пароль
         ]);
         Session::put('success', 'register success');
-        Redirect::to('admin_panel.php');
+        Redirect::to('login.php');
     } else {
       foreach($validate->errors() as $error) {
         echo $error . '<br>';
