@@ -55,6 +55,7 @@ $user = new User;
 
 <?if($user->isLoggedIn()):?>
     <h2>Hello <?=$user->data()->username?></h2>
+    <?=Session::flash('success');?>
     <p><a href="logout.php">logout</a></p>
     <p><a href="update_profile.php">Update profile</a></p>
     <p><a href="changepassword.php">Change password</a></p>
