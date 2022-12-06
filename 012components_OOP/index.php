@@ -49,8 +49,8 @@ $users = Database::getMake()->request('SELECT * FROM users_reg');
     'fname' => 'Erokhin'
   ]
 );*/
+$user = new User;//получаем текущег пользователя 
 
-$user = new User;
 ?>
 
 <?if($user->isLoggedIn()):?>
@@ -59,7 +59,19 @@ $user = new User;
     <p><a href="logout.php">logout</a></p>
     <p><a href="update_profile.php">Update profile</a></p>
     <p><a href="changepassword.php">Change password</a></p>
+
+    <?//Проверяем роль пользователя?>
+    <?if($user->hasPermissions('Admin')):?>
+        <?="You are admin"?>
+    <?elseif($user->hasPermissions('Moderator')):?>
+        <?="You are Moderator"?>
+    <?else:?>
+        <?="You are user"?>
+    <?endif?>
 <?else:?>
     <a href="login.php">login</a>
 <?endif?>
+
+<?
+//$anotherUser = new User('201');//получаем пользователя по id 
 ?>
