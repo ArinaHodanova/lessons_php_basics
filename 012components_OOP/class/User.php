@@ -81,7 +81,7 @@ class User {
   public function isLoggedIn() {
     return $this->isLoggedIn;
   }
-  
+
   public function logout() {
     $this->db->delete('user_session', ['userid', '=', $this->data()->id]);
     Cookie::delete(Config::get('cookie.cookie_name'));
@@ -100,6 +100,20 @@ class User {
 
     //меняем ин-ию у пользователя по id. Например админ может заменить ин-и у пользователя по id
     $this->db->update('users_reg', $id, $fields);
+  }
+
+  //проверяем роль пользователя
+  public function hasPermissions($key = null) {
+    $group = $this->db->get('roles', ['id', '=', $this->data()->groupid]);
+    if($group->count()) {
+        $permissions = $group->first()->permissions;
+        $permissions = json_decode($permissions, true);
+
+        if($permissions[$key]) {
+          return true;
+        }
+    }
+    return false;
   }
 }
 ?>
