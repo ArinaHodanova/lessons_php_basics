@@ -1,10 +1,12 @@
 <?
 class User {
-  private $db, $data, $session_name, $isLoggedIn;
+  private $db, $data, $session_name, $isLoggedIn, $cookie_name;
 
   public function __construct($user = null) {
     $this->db = Database::getMake();
     $this->session_name = Config::get('session.user_session');
+    //задаем имя куки
+    $this->cookie_name = Config::get('cookie.cookie_name');
 
     if(!$user) {
       //если сессия существует, то вытаскиваем пользователя по id
@@ -84,7 +86,7 @@ class User {
 
   public function logout() {
     $this->db->delete('user_session', ['userid', '=', $this->data()->id]);
-    Cookie::delete(Config::get('cookie.cookie_name'));
+    Cookie::delete($this->cookie_name);
     Session::delete($this->session_name);
   }
 
