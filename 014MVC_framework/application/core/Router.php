@@ -6,23 +6,54 @@ class Router
   protected $routes = [];
   protected $params = [];
   
-  public function __construct() {
-
+  public function __construct() 
+  {
+    $arr = require 'application/config/routes.php';
+    
+    foreach($arr as $key => $value) 
+    {
+      $this->add($key, $value);
+    }
   }
 
   //добавление маршрута
-  public function add() {
-
+  public function add($route, $params) 
+  {
+    $route = '#^'.$route.'$#';
+    $this->routes[$route] = $params;
   }
 
-  //проверка маршрута
-  public function match() {
-
+  //проверяем есть ли такой маршрута
+  public function match() 
+  {
+    //получаем текущий url
+    $url = trim($_SERVER['REQUEST_URI'], '/');
+    foreach($this->routes as $route => $params) {      
+      if(preg_match($route, $url, $matches)) 
+      {
+        $this->params = $params;
+        return true;
+      } 
+    }
+    return false;
   }
 
   //запуск роутера
-  public function run() {
-    echo 'Start' . '<br>';
+  public function run() 
+  {
+    if($this->match()) 
+    {
+        $controller = 'application\\controller\\' . ucfirst($this->params['controller']). 'Controller.php';
+        if(class_exists($controller)) 
+        {
+          echo 'Ok';
+        } else
+        {
+          echo 'Такой класс не найден '.$controller;
+        }
+    } else {
+        echo 'Маршрут не найден';
+    }
   }
 }
 ?>
