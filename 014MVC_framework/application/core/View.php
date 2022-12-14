@@ -27,6 +27,12 @@ class View
     }
   }
   
+  public function redirect($url) 
+  {
+    header('Location:' $url);
+    exit;
+  }
+  
   public static function error($type) 
   {
     http_response_code($type);
