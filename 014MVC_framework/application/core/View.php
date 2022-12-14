@@ -25,7 +25,13 @@ class View
     {
         echo 'Вид не найден '.$this->path;
     }
-
+  }
+  
+  public static function error($type) 
+  {
+    http_response_code($type);
+    require 'application/views/errors/'.$type.'.php';
+    exit;
   }
 
 }
