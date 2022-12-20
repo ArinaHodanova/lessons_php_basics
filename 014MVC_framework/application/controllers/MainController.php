@@ -7,7 +7,13 @@ class MainController extends Controller
 {
   public function indexAction() 
   {
-    $this->view->render('Главная страница');
+    $rezult = $this->model->getNews();
+    //переносим результат в вид
+    $vars = [
+      'news' =>  $rezult,
+    ];
+    $this->view->render('Главная страница', $vars);
   }
+
 }
 ?>
